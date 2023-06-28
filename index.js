@@ -1,3 +1,6 @@
+const searchForm = document.querySelector(".search-form");
+const cityInput = document.querySelector(".city-input");
+
 // This example requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
@@ -15,20 +18,23 @@ function initMap() {
   });
 
   // type query to change location
-  const request = {
-    query: "orange nsw",
-    fields: ["name", "geometry"],
-  };
+  searchForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const request = {
+      query: cityInput.value,
+      fields: ["name", "geometry"],
+    };
 
-  service = new google.maps.places.PlacesService(map);
-  service.findPlaceFromQuery(request, (results, status) => {
-    if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-      for (let i = 0; i < results.length; i++) {
-        createMarker(results[i]);
+    service = new google.maps.places.PlacesService(map);
+    service.findPlaceFromQuery(request, (results, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+        for (let i = 0; i < results.length; i++) {
+          createMarker(results[i]);
+        }
+
+        map.setCenter(results[0].geometry.location);
       }
-
-      map.setCenter(results[0].geometry.location);
-    }
+    });
   });
 }
 
