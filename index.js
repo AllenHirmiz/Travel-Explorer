@@ -1,48 +1,54 @@
+const searchForm = document.querySelector(".search-form");
+const cityInput = document.querySelector(".city-input");
 
-Certainly! Here's the updated JavaScript code:
+let map;
+let service;
+let infowindow;
 
-javascript
-Copy code
-function searchAttractions() {
-  var city = document.getElementById("cityInput").value;
+function initMap() {
+  const sydney = new google.maps.LatLng(-33.867, 151.195);
 
-  // Generate a unique callback function name
-  var callbackName = "jsonpCallback_" + Date.now();
+  infowindow = new google.maps.InfoWindow();
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: sydney,
+    zoom: 15,
+  });
 
-  // Create a script element
-  var script = document.createElement("script");
+  searchForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const query = cityInput.value; // Get the value of the input field
+    // geocoder gets attractions from query
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ address: query }, (results, status) => {
+      if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+        const location = results[0].geometry.location;
+        const request = {
+          location: location,
+          radius: 5000,
+          type: "tourist_attraction",
+        };
 
-  // Define the callback function that will handle the response
-  window[callbackName] = function(data) {
-    if (data.status === "OK") {
-      var attractions = data.results;
-      displayAttractions(attractions);
-    } else {
-      console.error("Error: " + data.status);
-    }
+        service = new google.maps.places.PlacesService(map);
+        service.nearbySearch(request, (results, status) => {
+          if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+            console.log("Query:", query); // Log the queried location
+            console.log("Number of Results:", results.length);
+            console.log("Tourist Attractions:");
 
-    // Clean up the script tag and callback function
-    document.body.removeChild(script);
-    delete window[callbackName];
-  };
+            const attractions = [];
+            const attractionsCount = Math.min(5, results.length);
+            for (let i = 0; i < attractionsCount; i++) {
+              const place = results[i];
+              attractions.push(place.name);
+              console.log(`Attraction ${i + 1}: ${place.name}`);
+            }
 
-  // Set the source URL with the query parameters and callback function name
-  script.src =
-    "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" +
-    city +
-    " attractions&key=AIzaSyAadcyTg2d2ZA-jt8Voo69vMSsuRF27A-I&callback=" + callbackName;
-
-  // Append the script element to the HTML document
-  document.body.appendChild(script);
-}
-
-function displayAttractions(attractions) {
-  var attractionsList = document.getElementById("attractionsList");
-  attractionsList.innerHTML = "";
-
-  attractions.slice(0, 5).forEach(function(attraction) {
-    var li = document.createElement("li");
-    li.textContent = attraction.name;
-    attractionsList.appendChild(li);
+            map.setCenter(sydney);
+          }
+        });
+      }
+    });
   });
 }
+
+window.initMap = initMap;
