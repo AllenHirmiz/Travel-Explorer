@@ -1,53 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Popular Attractions</title>
-  <style>
-    /* CSS styling for the attractions list */
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    li {
-      margin-bottom: 10px;
-    }
-  </style>
-</head>
-<body>
-  <h1>Popular Attractions</h1>
-  
-  <label for="cityInput">Enter a city:</label>
-  <input type="text" id="cityInput">
-  <button onclick="searchAttractions()">Search</button>
+  <head>
+    <title>Popular Attractions</title>
+    <style>
+      /* CSS styling for the attractions list */
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+    </style>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAadcyTg2d2ZA-jt8Voo69vMSsuRF27A-I&callback=initMap"
+      async
+      defer
+    ></script>
+    <script src="./index.js"></script>
+  </head>
+  <body>
+    <h1>Popular Attractions</h1>
 
-  <ul id="attractionsList"></ul>
+    <label for="cityInput">Enter a city:</label>
+    <input type="text" id="cityInput" />
+    <button onclick="searchAttractions()">Search</button>
 
-  <script>
-    function searchAttractions() {
-      var city = document.getElementById("cityInput").value;
-      
-      // Make a request to Google Places API
-      var url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + city + " attractions&key=AIzaSyCozM829o3XA_uGMN5e5W9zv4hRozyCnp4";
-      
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          var attractions = data.results;
-          displayAttractions(attractions);
-        })
-        .catch(error => console.error("Error:", error));
-    }
-
-    function displayAttractions(attractions) {
-      var attractionsList = document.getElementById("attractionsList");
-      attractionsList.innerHTML = "";
-
-      attractions.slice(0, 5).forEach(function(attraction) {
-        var li = document.createElement("li");
-        li.textContent = attraction.name;
-        attractionsList.appendChild(li);
-      });
-    }
-  </script>
-</body>
+    <ul id="attractionsList"></ul>
+  </body>
 </html>

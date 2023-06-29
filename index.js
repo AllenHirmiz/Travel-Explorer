@@ -1,55 +1,48 @@
-const searchForm = document.querySelector(".search-form");
-const cityInput = document.querySelector(".city-input");
 
-// This example requires the Places library. Include the libraries=places
-// parameter when you first load the API. For example:
-// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-let map;
-let service;
-let infowindow;
+Certainly! Here's the updated JavaScript code:
 
-function initMap() {
-  const sydney = new google.maps.LatLng(-33.867, 151.195);
+javascript
+Copy code
+function searchAttractions() {
+  var city = document.getElementById("cityInput").value;
 
-  infowindow = new google.maps.InfoWindow();
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: sydney,
-    zoom: 15,
-  });
+  // Generate a unique callback function name
+  var callbackName = "jsonpCallback_" + Date.now();
 
-  // type query to change location
-  searchForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-    const request = {
-      query: cityInput.value,
-      fields: ["name", "geometry"],
-    };
+  // Create a script element
+  var script = document.createElement("script");
 
-    service = new google.maps.places.PlacesService(map);
-    service.findPlaceFromQuery(request, (results, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-        for (let i = 0; i < results.length; i++) {
-          createMarker(results[i]);
-        }
+  // Define the callback function that will handle the response
+  window[callbackName] = function(data) {
+    if (data.status === "OK") {
+      var attractions = data.results;
+      displayAttractions(attractions);
+    } else {
+      console.error("Error: " + data.status);
+    }
 
-        map.setCenter(results[0].geometry.location);
-      }
-    });
-  });
+    // Clean up the script tag and callback function
+    document.body.removeChild(script);
+    delete window[callbackName];
+  };
+
+  // Set the source URL with the query parameters and callback function name
+  script.src =
+    "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" +
+    city +
+    " attractions&key=AIzaSyAadcyTg2d2ZA-jt8Voo69vMSsuRF27A-I&callback=" + callbackName;
+
+  // Append the script element to the HTML document
+  document.body.appendChild(script);
 }
 
-function createMarker(place) {
-  if (!place.geometry || !place.geometry.location) return;
+function displayAttractions(attractions) {
+  var attractionsList = document.getElementById("attractionsList");
+  attractionsList.innerHTML = "";
 
-  const marker = new google.maps.Marker({
-    map,
-    position: place.geometry.location,
-  });
-
-  google.maps.event.addListener(marker, "click", () => {
-    infowindow.setContent(place.name || "");
-    infowindow.open(map);
+  attractions.slice(0, 5).forEach(function(attraction) {
+    var li = document.createElement("li");
+    li.textContent = attraction.name;
+    attractionsList.appendChild(li);
   });
 }
-
-window.initMap = initMap;
