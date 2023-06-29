@@ -1,9 +1,7 @@
 const searchForm = document.querySelector(".search-form");
 const cityInput = document.querySelector(".city-input");
+const photosContainer = document.getElementById("photos-container");
 
-// This example requires the Places library. Include the libraries=places
-// parameter when you first load the API. For example:
-// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 let map;
 let service;
 let infowindow;
@@ -17,24 +15,10 @@ function initMap() {
     zoom: 15,
   });
 
-  // type query to change location
   searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
-    const request = {
-      query: cityInput.value,
-      fields: ["name", "geometry"],
-    };
-
-    service = new google.maps.places.PlacesService(map);
-    service.findPlaceFromQuery(request, (results, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-        for (let i = 0; i < results.length; i++) {
-          createMarker(results[i]);
-        }
-
-        map.setCenter(results[0].geometry.location);
-      }
-    });
+    const query = cityInput.value;
+    searchFlickrImages(query);
   });
 }
 
@@ -53,3 +37,38 @@ function createMarker(place) {
 }
 
 window.initMap = initMap;
+
+const flickrAPIKey = "fe1fb057d724fc26c393238213247861";
+
+function searchFlickrImages(query) {
+  const flickrEndpoint = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${flickrAPIKey}&format=json&nojsoncallback=1&text=${query}&per_page=6`;
+
+  fetch(flickrEndpoint)
+    .then((response) => response.json())
+    .then((data) => {
+      const photos = data.photos.photo;
+      photosContainer.innerHTML = "";
+      for (let i = 0; i < 6 && i < photos.length; i++) {
+        const photo = photos[i];
+        const imgUrl = `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`;
+        const card = document.createElement("div");
+        card.className = "card";
+        const img = document.createElement("img");
+        img.src = imgUrl;
+        card.appendChild(img);
+        const cardSection = document.createElement("div");
+        cardSection.className = "card-section";
+        card.appendChild(cardSection);
+        photosContainer.appendChild(card);
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+searchForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const query = cityInput.value;
+  searchFlickrImages(query);
+});
