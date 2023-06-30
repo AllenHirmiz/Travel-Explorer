@@ -8,7 +8,7 @@
  */
  #map {
     height: 10rem;
-    width: 30rem;
+    width: 40rem;
   }
   
   /* 
@@ -19,4 +19,7 @@
     height: 100%;
     margin: 0;
     padding: 0;
+  }
+  .card-section{
+    width: 40rem;
   }

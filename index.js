@@ -1,5 +1,6 @@
 const searchForm = document.querySelector(".search-form");
 const cityInput = document.querySelector(".city-input");
+const attractionResult = document.querySelectorAll(".attractions-result");
 
 let map;
 let service;
@@ -11,7 +12,7 @@ function initMap() {
   infowindow = new google.maps.InfoWindow();
   map = new google.maps.Map(document.getElementById("map"), {
     center: sydney,
-    zoom: 15,
+    zoom: 10,
   });
 
   searchForm.addEventListener("submit", function (event) {
@@ -40,6 +41,10 @@ function initMap() {
               const place = results[i];
               attractions.push(place.name);
               console.log(`Attraction ${i + 1}: ${place.name}`);
+              // display attraction results
+              attractionResult[i].innerHTML = `Attraction ${i + 1}: ${
+                place.name
+              }`;
             }
 
             map.setCenter(results[0].geometry.location);
