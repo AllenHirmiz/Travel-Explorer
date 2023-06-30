@@ -1,7 +1,9 @@
 const searchForm = document.querySelector(".search-form");
 const cityInput = document.querySelector(".city-input");
 const attractionNameEl = document.querySelectorAll(".attractions-name");
-const attractionPhoneNumberEl = document.querySelectorAll(".attractions-phone-number");
+const attractionPhoneNumberEl = document.querySelectorAll(
+  ".attractions-phone-number"
+);
 const attractionAddressEl = document.querySelectorAll(".attractions-address");
 const attractionWebsiteEl = document.querySelectorAll(".attractions-website");
 const attractionRatingEl = document.querySelectorAll(".attractions-rating");
@@ -41,41 +43,44 @@ function initMap() {
 
             const attractions = [];
             const attractionsCount = Math.min(5, results.length);
-            
+
             for (let i = 0; i < attractionsCount; i++) {
               const place = results[i];
               attractions.push(place.name);
-              
+              createMarker(place);
+
               service.getDetails(
                 {
                   placeId: place.place_id,
-                  fields: ["name", "formatted_address", "rating", "user_ratings_total", "formatted_phone_number", "website"],
+                  fields: [
+                    "name",
+                    "formatted_address",
+                    "rating",
+                    "user_ratings_total",
+                    "formatted_phone_number",
+                    "website",
+                  ],
                 },
                 (result, status) => {
                   if (status === google.maps.places.PlacesServiceStatus.OK) {
                     console.log(`Attraction ${i + 1}: ${place.name}`);
-              // display attraction results
-              attractionNameEl[i].innerHTML = `Attraction ${i + 1}: ${
-                place.name
-              }`;
-              attractionAddressEl[i].innerHTML = `Address: ${
-                result.formatted_address
-              }`;
-              attractionPhoneNumberEl[i].innerHTML = `Phone Number: ${
-                result.formatted_phone_number
-              }`;
-              attractionWebsiteEl[i].innerHTML = `Website: ${
-                result.website
-              }`;
-              attractionRatingEl[i].innerHTML = `Rating: ${
-                place.rating
-              }`;
-               createMarker(place);
+                    // display attraction results
+                    attractionNameEl[i].innerHTML = `Attraction ${i + 1}: ${
+                      place.name
+                    }`;
+                    attractionAddressEl[
+                      i
+                    ].innerHTML = `Address: ${result.formatted_address}`;
+                    attractionPhoneNumberEl[
+                      i
+                    ].innerHTML = `Phone Number: ${result.formatted_phone_number}`;
+                    attractionWebsiteEl[
+                      i
+                    ].innerHTML = `Website: ${result.website}`;
+                    attractionRatingEl[i].innerHTML = `Rating: ${place.rating}`;
                   }
                 }
               );
-
-              
             }
 
             map.setCenter(results[0].geometry.location);
@@ -85,5 +90,19 @@ function initMap() {
     });
   });
 }
+function createMarker(place) {
+  if (!place.geometry || !place.geometry.location) return;
 
+  const marker = new google.maps.Marker({
+    map,
+    position: place.geometry.location,
+  });
+
+  google.maps.event.addListener(marker, "click", () => {
+    infowindow.setContent(place.name || "");
+    infowindow.open(map);
+  });
+}
+
+window.initMap = initMap;
 window.initMap = initMap;
