@@ -20,124 +20,19 @@
       <div class="grid-container">
         <div class="grid-x grid-padding-x align-center">
           <div class="medium-6 cell">
-            <input class="city-input" type="text" placeholder="Search bar" />
+            <input id="city-input" class="city-input" type="text" placeholder="Search bar" />
           </div>
           <input type="submit" class="button" value="Submit" />
         </div>
       </div>
     </form>
-    <!-- favourite section -->
-    <div class="grid-container">
-      <div class="grid-x grid-padding-x align-center">
-        <div class="medium-6 cell">
-          <input type="text" />
-        </div>
-        <input type="submit" class="button" value="Favourite" />
-      </div>
-    </div>
+    
 
-    <!-- grid -->
-    <div class="grid-container">
-      <div class="grid-x grid-margin-x grid-padding-x">
-        <div class="cell small-6">
-          <!-- Google places -->
-          <h2 class="text-center">Popular attractions</h2>
-          <div class="grid-container">
-            <div class="grid-x grid-margin-x small-up-2 medium-up-3">
-              <!-- result -->
-              <div class="card">
-                <div id="map"></div>
-              </div>
-              <!-- end of result -->
-              <!-- result -->
-              <div class="card">
-                <img src="assets/img/generic/rectangle-1.jpg" />
-                <div class="card-section">
-                  <p>This is a simple card with an image.</p>
-                </div>
-              </div>
-              <!-- end of result -->
-              <!-- result -->
-              <div class="card">
-                <img src="assets/img/generic/rectangle-1.jpg" />
-                <div class="card-section">
-                  <p>This is a simple card with an image.</p>
-                </div>
-              </div>
-              <!-- end of result -->
-              <!-- result -->
-              <div class="card">
-                <img src="assets/img/generic/rectangle-1.jpg" />
-                <div class="card-section">
-                  <p>This is a simple card with an image.</p>
-                </div>
-              </div>
-              <!-- end of result -->
-              <!-- result -->
-              <div class="card">
-                <img src="assets/img/generic/rectangle-1.jpg" />
-                <div class="card-section">
-                  <p>This is a simple card with an image.</p>
-                </div>
-              </div>
-              <!-- end of result -->
-            </div>
-          </div>
-        </div>
-
-        <!-- filckr -->
-        <div class="cell small-6">
-          <h2 class="text-center">Photos</h2>
-          <div class="grid-container">
-            <div class="grid-x grid-margin-x small-up-2 medium-up-3">
-              <!-- result -->
-              <div class="card">
-                <img src="assets/img/generic/rectangle-1.jpg" />
-                <div class="card-section">
-                  <p>This is a simple card with an image.</p>
-                </div>
-              </div>
-              <!-- end of result -->
-              <!-- result -->
-              <div class="card">
-                <img src="assets/img/generic/rectangle-1.jpg" />
-                <div class="card-section">
-                  <p>This is a simple card with an image.</p>
-                </div>
-              </div>
-              <!-- end of result -->
-              <!-- result -->
-              <div class="card">
-                <img src="assets/img/generic/rectangle-1.jpg" />
-                <div class="card-section">
-                  <p>This is a simple card with an image.</p>
-                </div>
-              </div>
-              <!-- end of result -->
-              <!-- result -->
-              <div class="card">
-                <img src="assets/img/generic/rectangle-1.jpg" />
-                <div class="card-section">
-                  <p>This is a simple card with an image.</p>
-                </div>
-              </div>
-              <!-- end of result -->
-              <!-- result -->
-              <div class="card">
-                <img src="assets/img/generic/rectangle-1.jpg" />
-                <div class="card-section">
-                  <p>This is a simple card with an image.</p>
-                </div>
-              </div>
-              <!-- end of result -->
-            </div>
-          </div>
-        </div>
-      </div>
+    <!--- Flickr Top 5 Photos API  -->
+    <div>
+      <h2>Showing results for <span id="result-text"></span></h2>
+      <div id="flickr-photo-api" class="flickr-photo-api"> </div>
     </div>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAadcyTg2d2ZA-jt8Voo69vMSsuRF27A-I&callback=initMap&libraries=places&v=weekly"
-      defer
-    ></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   </body>
 </html>

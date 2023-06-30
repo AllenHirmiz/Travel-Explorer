@@ -1,55 +1,72 @@
-const searchForm = document.querySelector(".search-form");
-const cityInput = document.querySelector(".city-input");
+const searchFormEl = document.querySelector(".search-form");
+var repoContainerEl = document.querySelector('#flickr-photo-api');
+var repoSearchTerm = document.querySelector('#result-text');
+var cityInputEl = document.querySelector('#city-input');
 
-// This example requires the Places library. Include the libraries=places
-// parameter when you first load the API. For example:
-// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-let map;
-let service;
-let infowindow;
 
-function initMap() {
-  const sydney = new google.maps.LatLng(-33.867, 151.195);
+function handleFlickrSearchUrl (event) {
+  event.preventDefault();
+  var cityInput = cityInputEl.value.trim();
+  console.log("cityInput " + cityInput)
+  if (cityInput) {
+    getFlickrPhotoRepos(cityInput);
+    console.log("handleFlickrSearchUrl true")
+  } else {
+    alert('Please enter a GitHub username');
+  }
+};
 
-  infowindow = new google.maps.InfoWindow();
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: sydney,
-    zoom: 15,
-  });
-
-  // type query to change location
-  searchForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-    const request = {
-      query: cityInput.value,
-      fields: ["name", "geometry"],
-    };
-
-    service = new google.maps.places.PlacesService(map);
-    service.findPlaceFromQuery(request, (results, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-        for (let i = 0; i < results.length; i++) {
-          createMarker(results[i]);
-        }
-
-        map.setCenter(results[0].geometry.location);
+var getFlickrPhotoRepos = function (user) {
+  var apiUrl = 'https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7e0eac3fe5289a602d661c8c7ec31672&text=' + user + '&sort=desc&per_page=5&page=1&format=json&nojsoncallback=1';
+  console.log(apiUrl);
+  fetch(apiUrl)
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          displayRepos(data.photos.photo, user);
+          console.log("getFlickrPhotoRepos True");
+          console.log(apiUrl);
+        });
+      } else {
+        alert('Error: ' + response.statusText);
       }
+    })
+    .catch(function (error) {
+      alert('Unable to connect to GitHub');
     });
-  });
-}
+};
 
-function createMarker(place) {
-  if (!place.geometry || !place.geometry.location) return;
 
-  const marker = new google.maps.Marker({
-    map,
-    position: place.geometry.location,
-  });
+var displayRepos = function (repos, searchTerm) {
+  console.log("You are here displayRepos " + repos.length)
+    if (repos.length === 0) {
+    repoContainerEl.textContent = 'No repositories found.';
+    return;
+  } else {
+    ;
+  }
 
-  google.maps.event.addListener(marker, "click", () => {
-    infowindow.setContent(place.name || "");
-    infowindow.open(map);
-  });
-}
+  repoSearchTerm.textContent = searchTerm;
 
-window.initMap = initMap;
+  for (var i = 0; i < repos.length; i++) {
+    var repoId = repos[i].id // call correct para
+    var repoServerId = repos[i].server;
+    var repoSecret = repos[i].secret;
+    var repoFarm = repos[i].farm;
+    var photoLink = "https://farm"+ repoFarm +".staticflickr.com/"+ repoServerId +"/"+ repoId +"_"+ repoSecret +".jpg"   
+    
+    console.log("photoLink "+ photoLink)
+    console.log("Allen")
+
+    var repoEl = document.createElement('div');
+    repoEl.classList = 'list-item flex-row justify-space-between align-center';
+
+    var titleEl = document.createElement('img');
+    titleEl.src = photoLink;
+
+    repoContainerEl.appendChild(titleEl);
+  }
+};
+
+
+searchFormEl.addEventListener('submit', handleFlickrSearchUrl);
