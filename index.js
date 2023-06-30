@@ -46,6 +46,7 @@ function initMap() {
               attractionResult[i].innerHTML = `Attraction ${i + 1}: ${
                 place.name
               }`;
+              createMarker(place);
             }
 
             map.setCenter(results[0].geometry.location);
