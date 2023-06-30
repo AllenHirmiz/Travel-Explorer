@@ -1,9 +1,6 @@
 const searchForm = document.querySelector(".search-form");
 const cityInput = document.querySelector(".city-input");
 
-// This example requires the Places library. Include the libraries=places
-// parameter when you first load the API. For example:
-// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 let map;
 let service;
 let infowindow;
@@ -20,19 +17,35 @@ function initMap() {
   // type query to change location
   searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
-    const request = {
-      query: cityInput.value,
-      fields: ["name", "geometry"],
-    };
+    const query = cityInput.value;
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ address: query }, (results, status) => {
+      if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+        const location = results[0].geometry.location;
+        const request = {
+          location: location,
+          radius: 5000,
+          type: "tourist_attraction",
+        };
 
-    service = new google.maps.places.PlacesService(map);
-    service.findPlaceFromQuery(request, (results, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-        for (let i = 0; i < results.length; i++) {
-          createMarker(results[i]);
-        }
+        service = new google.maps.places.PlacesService(map);
+        service.nearbySearch(request, (results, status) => {
+          if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+            console.log("Query:", query); // Log the queried location
+            console.log("Number of Results:", results.length);
+            console.log("Tourist Attractions:");
 
-        map.setCenter(results[0].geometry.location);
+            const attractions = [];
+            const attractionsCount = Math.min(5, results.length);
+            for (let i = 0; i < attractionsCount; i++) {
+              const place = results[i];
+              attractions.push(place.name);
+              console.log(`Attraction ${i + 1}: ${place.name}`);
+            }
+
+            map.setCenter(results[0].geometry.location);
+          }
+        });
       }
     });
   });
