@@ -1,5 +1,6 @@
 const searchForm = document.querySelector(".search-form");
 const cityInput = document.querySelector(".city-input");
+const errorHandler = document.querySelector(".error-handler");
 const attractionNameEl = document.querySelectorAll(".attractions-name");
 const attractionPhoneNumberEl = document.querySelectorAll(
   ".attractions-phone-number"
@@ -63,6 +64,7 @@ function initMap() {
                 },
                 (result, status) => {
                   if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    errorHandler.innerHTML = "";
                     console.log(`Attraction ${i + 1}: ${place.name}`);
                     // display attraction results
                     attractionNameEl[i].innerHTML = `Attraction ${i + 1}: ${
@@ -86,6 +88,9 @@ function initMap() {
             map.setCenter(results[0].geometry.location);
           }
         });
+      } else {
+        errorHandler.innerHTML = "No attraction data found";
+        return;
       }
     });
   });
