@@ -32,7 +32,6 @@ function initMap() {
           type: "tourist_attraction",
           fields: ["name", "rating", "user_ratings_total", "place_id"],
         };
-
         service = new google.maps.places.PlacesService(map);
         service.nearbySearch(request, (results, status) => {
           if (status === google.maps.places.PlacesServiceStatus.OK && results) {
