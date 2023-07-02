@@ -7,8 +7,8 @@
  * that contains the map. 
  */
  #map {
-    height: 10rem;
-    width: 30rem;
+    height: 20rem;
+    width: 100%;
   }
   
   /* 
@@ -19,4 +19,7 @@
     height: 100%;
     margin: 0;
     padding: 0;
+  }
+  .card-section{
+    width: 40rem;
   }
