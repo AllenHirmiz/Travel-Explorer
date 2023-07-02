@@ -8,10 +8,13 @@ const attractionPhoneNumberEl = document.querySelectorAll(
 const attractionAddressEl = document.querySelectorAll(".attractions-address");
 const attractionWebsiteEl = document.querySelectorAll(".attractions-website");
 const attractionRatingEl = document.querySelectorAll(".attractions-rating");
+const photosContainer = document.getElementById("photos-container");
 
 let map;
 let service;
 let infowindow;
+
+var photo_positon = 0;
 
 function initMap() {
   const sydney = new google.maps.LatLng(-33.867, 151.195);
@@ -36,19 +39,30 @@ function initMap() {
           fields: ["name", "rating", "user_ratings_total", "place_id"],
         };
         service = new google.maps.places.PlacesService(map);
-        service.nearbySearch(request, (results, status) => {
+        service.nearbySearch(request, async (results, status) => {
           if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-            console.log("Query:", query); // Log the queried location
-            console.log("Number of Results:", results.length);
-            console.log("Tourist Attractions:");
+            // console.log("Query:", query); // Log the queried location
+            // console.log("Number of Results:", results.length);
+            // console.log("Tourist Attractions:");
 
             const attractions = [];
             const attractionsCount = Math.min(5, results.length);
-
+            photosContainer.innerHTML = "";
+            card.innerHTML = "";
             for (let i = 0; i < attractionsCount; i++) {
               const place = results[i];
               attractions.push(place.name);
               createMarker(place);
+              console.log("Before :" + place.name);
+              // console.log(query + " " + place.name);
+
+              const img = await searchFlickrImages(query + " " + place.name);
+              card.appendChild(img);
+              const cardSection = document.createElement("div");
+              cardSection.className = "card-section";
+              card.appendChild(cardSection);
+              photosContainer.appendChild(card);
+              console.log("After: " + place.name);
 
               service.getDetails(
                 {
@@ -65,7 +79,7 @@ function initMap() {
                 (result, status) => {
                   if (status === google.maps.places.PlacesServiceStatus.OK) {
                     errorHandler.innerHTML = "";
-                    console.log(`Attraction ${i + 1}: ${place.name}`);
+                    // console.log(`Attraction ${i + 1}: ${place.name}`);
                     // display attraction results
                     attractionNameEl[i].innerHTML = `Attraction ${i + 1}: ${
                       place.name
@@ -110,4 +124,39 @@ function createMarker(place) {
 }
 
 window.initMap = initMap;
-window.initMap = initMap;
+const card = document.createElement("div");
+card.className = "card";
+
+const flickrAPIKey = "fe1fb057d724fc26c393238213247861";
+
+function searchFlickrImages(query) {
+  return new Promise((img_return) => {
+    const flickrEndpoint = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${flickrAPIKey}&radius=1&format=json&nojsoncallback=1&text=${query}&per_page=5`;
+
+    fetch(flickrEndpoint)
+      .then((response) => response.json())
+      .then(
+        (data) => {
+          if (!data) {
+            return;
+          }
+          const photos = data.photos.photo;
+          photosContainer.innerHTML = "";
+          console.log(query);
+          const photo = photos[0];
+          // photo_positon++;
+
+          const imgUrl = `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`;
+
+          const img = document.createElement("img");
+          img.src = imgUrl;
+
+          img_return(img);
+        }
+        // }
+      )
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
+}
