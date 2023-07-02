@@ -24,7 +24,8 @@ function initMap() {
 
   searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
-    const query = cityInput.value;
+    const query = cityInput.value; // Get the value of the input field
+    // geocoder gets attractions from query
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ address: query }, (results, status) => {
       if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
@@ -84,7 +85,6 @@ function initMap() {
                 }
               );
             }
-
             map.setCenter(results[0].geometry.location);
           }
         });
