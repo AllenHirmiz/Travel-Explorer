@@ -14,10 +14,12 @@ function initMap() {
     zoom: 15,
   });
 
-  // type query to change location
   searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
-    const query = cityInput.value;
+feature-places
+    const query = cityInput.value; // Get the value of the input field
+    // geocoder gets attractions from query
+
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ address: query }, (results, status) => {
       if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
@@ -43,25 +45,12 @@ function initMap() {
               console.log(`Attraction ${i + 1}: ${place.name}`);
             }
 
-            map.setCenter(results[0].geometry.location);
+feature-places
+            map.setCenter(sydney);
           }
         });
       }
     });
-  });
-}
-
-function createMarker(place) {
-  if (!place.geometry || !place.geometry.location) return;
-
-  const marker = new google.maps.Marker({
-    map,
-    position: place.geometry.location,
-  });
-
-  google.maps.event.addListener(marker, "click", () => {
-    infowindow.setContent(place.name || "");
-    infowindow.open(map);
   });
 }
 
