@@ -16,8 +16,10 @@ function initMap() {
 
   searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
+feature-places
     const query = cityInput.value; // Get the value of the input field
     // geocoder gets attractions from query
+
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ address: query }, (results, status) => {
       if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
@@ -43,6 +45,7 @@ function initMap() {
               console.log(`Attraction ${i + 1}: ${place.name}`);
             }
 
+feature-places
             map.setCenter(sydney);
           }
         });
