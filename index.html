@@ -34,10 +34,24 @@
         <h2 class="city-heading">Sydney</h2>
       </div>
       <div class="grid-x grid-padding-x align-center">
-        <input type="submit" class="button" value="Add to Favourite" />
-        <input type="submit" class="button" value="Select From Favourites" />
+        <input type="submit" id="add-favourite" class="button" value="Add to Favourite" />
+        <input id="view-favourite" type="submit" class="button" onclick="myFunction()" value="Select From Favourites" />
       </div>
+      <div class="grid-x grid-padding-x align-center">
+        
+        <ol id="favourite-list"style="Display:none">
+        </ol>
+      </div>
+      
     </div>
+
+    <section class="highscore-screen hide highscores-page">
+      <h2>Highscores</h2>
+      <ol id="favourite"></ol>
+      <button id="go-back">Go Back</button>
+      <button id="clear-favourite">Clear Highscores</button>
+    </section>
+
 
     <!-- grid -->
     <div class="grid-container">
@@ -127,5 +141,16 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAadcyTg2d2ZA-jt8Voo69vMSsuRF27A-I&callback=initMap&libraries=places&v=weekly"
       defer
     ></script>
+    <script>
+      function myFunction() {
+        var x = document.getElementById("favourite-list");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+      </script>
+    
   </body>
 </html>
