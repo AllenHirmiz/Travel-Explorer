@@ -1,4 +1,5 @@
 const searchForm = document.querySelector(".search-form");
+const searchButton = document.getElementById("search");
 const cityInput = document.querySelector(".city-input");
 const errorHandler = document.querySelector(".error-handler");
 const attractionNameEl = document.querySelectorAll(".attractions-name");
@@ -30,7 +31,7 @@ function initMap() {
     zoom: 10,
   });
 
-  searchForm.addEventListener("submit", function (event) {
+  searchButton.addEventListener("click", function (event) {
     event.preventDefault();
     const query = cityInput.value; // Get the value of the input field
     // geocoder gets attractions from query
@@ -210,17 +211,19 @@ viewFavourite.addEventListener("click", function(event) {
 
 
 function renderfavourites() {
-  console.log("Allen")
   favouritesList.innerHTML = "";
 
   // Render a new li for each favourite
   for (var i = 0; i < favourite.length; i++) {
     var favourites = favourite[i];
     console.log(favourites)
-    var li = document.createElement("li");
-    li.textContent = favourites;
-    li.setAttribute("data-index", i);
-    
-    favouritesList.appendChild(li);
+    var input = document.createElement("input")
+    input.value = favourites;
+    input.setAttribute("id", favourites);
+    input.setAttribute("type", "button");
+    input.setAttribute("class", "button");
+    input.setAttribute("onClick", "reply_click(this.id)");
+    favouritesList.appendChild(input);
   }
+  
 }

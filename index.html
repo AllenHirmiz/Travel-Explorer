@@ -16,14 +16,14 @@
   </head>
   <body>
     <!-- form -->
-    <form class="search-form">
+    <form id="search-form" class="search-form">
       <div class="grid-container">
         <div class="grid-x grid-padding-x align-center">
           <div class="medium-6 cell">
-            <input class="city-input" type="text" placeholder="Search bar" />
+            <input id ="city-input" class="city-input" type="text" placeholder="Search bar" />
           </div>
           <p class="error-handler"></p>
-          <input type="submit" class="button" value="Search" />
+          <input id="search" type="submit" class="button" value="Search" />
         </div>
       </div>
     </form>
@@ -34,12 +34,12 @@
         <h2 class="city-heading">Sydney</h2>
       </div>
       <div class="grid-x grid-padding-x align-center">
-        <input type="submit" id="add-favourite" class="button" value="Add to Favourite" />
-        <input id="view-favourite" type="submit" class="button" onclick="myFunction()" value="Select From Favourites" />
+        <input type="button" id="add-favourite" class="button" value="Add to Favourite" />
+        <input id="view-favourite" type="button" class="button" onclick="myFunction()" value="Select From Favourites" />
       </div>
       <div class="grid-x grid-padding-x align-center">
         
-        <ol id="favourite-list"style="Display:none">
+        <ol id="favourite-list" class="search-form" style="Display:none">
         </ol>
       </div>
       
@@ -149,6 +149,13 @@
         } else {
           x.style.display = "none";
         }
+      }
+      function reply_click(clicked_id)
+      {
+          
+          document.getElementById("city-input").value = clicked_id;
+          document.getElementById("search").click();
+
       }
       </script>
     
