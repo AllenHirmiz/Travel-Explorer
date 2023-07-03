@@ -137,7 +137,14 @@ function searchFlickrImages(query) {
       .then((response) => response.json())
       .then(
         (data) => {
-          if (!data) {
+          if (
+            !data ||
+            !data.photos ||
+            !data.photos.photo ||
+            data.photos.photo.length === 0
+          ) {
+            photosContainer.textContent = "no photos found";
+            console.log("no photos found");
             return;
           }
           const photos = data.photos.photo;
