@@ -9,6 +9,7 @@ const attractionAddressEl = document.querySelectorAll(".attractions-address");
 const attractionWebsiteEl = document.querySelectorAll(".attractions-website");
 const attractionRatingEl = document.querySelectorAll(".attractions-rating");
 const photosContainer = document.getElementById("photos-container");
+const mainContainerEl = document.getElementById("mainContainer");
 
 let map;
 let service;
@@ -52,6 +53,7 @@ function initMap() {
             card.innerHTML = "";
             for (let i = 0; i < attractionsCount; i++) {
               const place = results[i];
+              console.log(place.name);
               attractions.push(place.name);
               createMarker(place);
               console.log("Before :" + place.name);
@@ -82,7 +84,7 @@ function initMap() {
                     errorHandler.innerHTML = "";
                     // console.log(`Attraction ${i + 1}: ${place.name}`);
                     // display attraction results
-                    attractionNameEl[i].innerHTML = `Attraction ${i + 1}: ${
+                    attractionNameEl[i].innerHTML = ` ${
                       place.name
                     }`;
                     attractionAddressEl[
@@ -107,6 +109,7 @@ function initMap() {
         return;
       }
     });
+    mainContainerEl.classList.remove("hide");
   });
 }
 function createMarker(place) {

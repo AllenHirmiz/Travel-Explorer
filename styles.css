@@ -1,5 +1,6 @@
 .small-6{
-    background-color: aqua;
+    /* background-color: aqua; */
+    border: 1px solid black;
 }
 
 /* 
@@ -19,6 +20,7 @@
     height: 100%;
     margin: 0;
     padding: 0;
+    background-color: #E0F1F9;
   }
   .card-section{
     width: 40rem;
