@@ -56,15 +56,8 @@ function initMap() {
               createMarker(place);
               console.log("Before :" + place.name);
               // console.log(query + " " + place.name);
-
-              const img = await searchFlickrImages(query + " " + place.name);
-              card.appendChild(img);
-              const cardSection = document.createElement("div");
-              cardSection.className = "card-section";
-              card.appendChild(cardSection);
-              photosContainer.appendChild(card);
-              console.log("After: " + place.name);
-
+              
+              
               service.getDetails(
                 {
                   placeId: place.place_id,
@@ -85,6 +78,7 @@ function initMap() {
                     attractionNameEl[i].innerHTML = `Attraction ${i + 1}: ${
                       place.name
                     }`;
+                    searchFlickrImages(query + " " + place.name);
                     attractionAddressEl[
                       i
                     ].innerHTML = `Address: ${result.formatted_address}`;
@@ -137,14 +131,7 @@ function searchFlickrImages(query) {
       .then((response) => response.json())
       .then(
         (data) => {
-          if (
-            !data ||
-            !data.photos ||
-            !data.photos.photo ||
-            data.photos.photo.length === 0
-          ) {
-            photosContainer.textContent = "no photos found";
-            console.log("no photos found");
+          if (!data) {
             return;
           }
           const photos = data.photos.photo;
@@ -157,6 +144,11 @@ function searchFlickrImages(query) {
 
           const img = document.createElement("img");
           img.src = imgUrl;
+          card.appendChild(img);
+          const cardSection = document.createElement("div");
+          cardSection.className = "card-section";
+          card.appendChild(cardSection);
+          photosContainer.appendChild(card);
 
           img_return(img);
         }
