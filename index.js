@@ -9,7 +9,22 @@ const attractionAddressEl = document.querySelectorAll(".attractions-address");
 const attractionWebsiteEl = document.querySelectorAll(".attractions-website");
 const attractionRatingEl = document.querySelectorAll(".attractions-rating");
 const photosContainer = document.getElementById("photos-container");
+<<<<<<< Updated upstream
 var submitFavouriteButton = document.getElementById('add-favourite');
+=======
+const openModalButton = document.getElementById("openModalButton");
+const modal = document.querySelector("#modal");
+const closeModalButton = modal.querySelector(".close");
+const cityName = document.getElementById("city-name");
+const addToFavoritesButton = document.getElementById("add-to-favorites");
+const favoritesModal = document.getElementById("favorites-modal");
+const viewFavoritesButton = document.getElementById("view-favorites");
+const favoritesList = document.getElementById("favorites-list");
+const clearFavoritesButton = document.getElementById("clear-favorites");
+const openFavoritesButton = document.getElementById("openFavoritesButton");
+const closeFavoritesButton = document.getElementById("closeFavoritesButton");
+const favoriteButtons = document.querySelectorAll(".favorite-button");
+>>>>>>> Stashed changes
 
 let map;
 let service;
@@ -59,8 +74,7 @@ function initMap() {
               createMarker(place);
               console.log("Before :" + place.name);
               // console.log(query + " " + place.name);
-              
-              
+
               service.getDetails(
                 {
                   placeId: place.place_id,
@@ -160,6 +174,7 @@ function searchFlickrImages(query) {
   });
 }
 
+<<<<<<< Updated upstream
 
 
 function addFavourite(event) {
@@ -178,3 +193,109 @@ function addFavourite(event) {
     viewFavourites();
   }
 }
+=======
+// Function to handle form submission
+function handleSubmit(event) {
+  event.preventDefault();
+  const cityInput = document.querySelector(".city-input");
+  const cityName = cityInput.value;
+  document.querySelector("#city-name").textContent = cityName;
+  cityInput.value = ""; // Clear the input field
+}
+
+// Add event listener to the form
+const form = document.querySelector(".search-form");
+form.addEventListener("submit", handleSubmit);
+
+// Function to add an attraction to the favorites list in local storage
+function addToFavorites(attractionName) {
+  // Get the existing favorites from local storage or initialize an empty array
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+  // Check if the attraction is already in favorites
+  const existingIndex = favorites.findIndex((item) => item === attractionName);
+  if (existingIndex === -1) {
+    // If not already in favorites, add it
+    favorites.push(attractionName);
+
+    // Update the local storage with the updated favorites array
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+
+    // Display a confirmation message to the user in a modal
+    const modalContent = document.querySelector("#modal .modal-content");
+    modalContent.innerHTML = `
+      <span class="close">&times;</span>
+      <h2>Added to Favorites!</h2>
+      <button id="view-favorites">View Favorites</button>
+    `;
+    const modal = document.getElementById("modal");
+    modal.style.display = "block";
+
+    // Add click event listener to "View Favorites" button in the modal
+    const viewFavoritesButton = modal.querySelector("#view-favorites");
+    viewFavoritesButton.addEventListener("click", () => {
+      modal.style.display = "none"; // Hide the current modal
+      favoritesModal.style.display = "block"; // Show the favorites modal
+      displayFavorites(); // Display the favorited locations
+    });
+  } else {
+    // If already in favorites, display a message to the user
+    alert(`${attractionName} is already in favorites!`);
+  }
+}
+
+// Function to display the favorited locations in the favorites modal
+function displayFavorites() {
+  favoritesList.innerHTML = ""; // Clear the existing list
+
+  // Get the favorites from local storage
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+  if (favorites.length === 0) {
+    // If no favorites, display a message
+    favoritesList.innerHTML = "<p>No favorites added.</p>";
+  } else {
+    // Create a list item for each favorite and append it to the favorites list
+    favorites.forEach((favorite) => {
+      const li = document.createElement("li");
+      li.textContent = favorite;
+      favoritesList.appendChild(li);
+    });
+  }
+}
+
+// Function to clear the favorites from local storage
+function clearFavorites() {
+  localStorage.removeItem("favorites");
+  favoritesList.innerHTML = "<p>No favorites added.</p>";
+}
+
+// Open the favorites modal when the button is clicked
+openFavoritesButton.addEventListener("click", () => {
+  favoritesModal.style.display = "block";
+  displayFavorites();
+});
+
+// Close the favorites modal when the close button is clicked
+closeFavoritesButton.addEventListener("click", () => {
+  favoritesModal.style.display = "none";
+});
+
+// Close the favorites modal when the user clicks outside of it
+window.addEventListener("click", (event) => {
+  if (event.target === favoritesModal) {
+    favoritesModal.style.display = "none";
+  }
+});
+
+// Clear favorites button click event
+clearFavoritesButton.addEventListener("click", clearFavorites);
+
+// Add click event listeners to each favorite button
+favoriteButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const attractionName = button.previousElementSibling.textContent;
+    addToFavorites(attractionName);
+  });
+});
+>>>>>>> Stashed changes
