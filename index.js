@@ -9,12 +9,15 @@ const attractionAddressEl = document.querySelectorAll(".attractions-address");
 const attractionWebsiteEl = document.querySelectorAll(".attractions-website");
 const attractionRatingEl = document.querySelectorAll(".attractions-rating");
 const photosContainer = document.getElementById("photos-container");
+var submitFavouriteButton = document.getElementById('add-favourite');
 
 let map;
 let service;
 let infowindow;
 
 var photo_positon = 0;
+
+submitFavouriteButton.addEventListener('click', addFavourite);
 
 function initMap() {
   const sydney = new google.maps.LatLng(-33.867, 151.195);
@@ -131,9 +134,6 @@ function searchFlickrImages(query) {
       .then((response) => response.json())
       .then(
         (data) => {
-          if (!data) {
-            return;
-          }
           const photos = data.photos.photo;
           photosContainer.innerHTML = "";
           console.log(query);
@@ -158,4 +158,23 @@ function searchFlickrImages(query) {
         console.error("Error:", error);
       });
   });
+}
+
+
+
+function addFavourite(event) {
+  event.preventDefault();
+  var initials = initialsInput.value.trim();
+  if (initials !== '') {
+    var Favourite = {
+      initials: initials,
+      score: score
+    };
+    Favourites.push(Favourite);
+    Favourites.sort(function (a, b) {
+      return b.score - a.score;
+    });
+    saveFavourites();
+    viewFavourites();
+  }
 }
