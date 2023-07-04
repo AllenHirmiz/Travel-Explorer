@@ -18,6 +18,7 @@ var favouritesList = document.getElementById("favourite-list");
 var viewFavourite = document.getElementById("view-favourite");
 const cityHeading = document.getElementById("city-heading");
 const modalHeading = document.getElementById("modal-heading");
+const titleEl = document.getElementById("title");
 
 let map;
 let service;
@@ -87,11 +88,13 @@ function initMap() {
                     errorHandler.innerHTML = "";
                     // console.log(`Attraction ${i + 1}: ${place.name}`);
                     // display attraction results
-
+                    
                     attractionNameEl[i].innerHTML = ` ${place.name}`;
                     searchFlickrImages(query + " " + place.name);
 
-                    attractionNameEl[i].innerHTML = ` ${place.name}`;
+                    attractionNameEl[i].innerHTML = ` ${
+                      place.name
+                    }`;
                     attractionAddressEl[
                       i
                     ].innerHTML = `Address: ${result.formatted_address}`;
@@ -117,6 +120,7 @@ function initMap() {
     mainContainerEl.classList.remove("hide");
     mapEl.classList.remove("hide");
     addFavourite.classList.remove("hide");
+    titleEl.classList.remove("page-center");
   });
 }
 function createMarker(place) {
@@ -140,37 +144,39 @@ card.className = "card";
 const flickrAPIKey = "fe1fb057d724fc26c393238213247861";
 
 function searchFlickrImages(query) {
-  const flickrEndpoint = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${flickrAPIKey}&radius=1&format=json&nojsoncallback=1&text=${query}&per_page=5`;
+  return new Promise((img_return) => {
+    const flickrEndpoint = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${flickrAPIKey}&radius=1&format=json&nojsoncallback=1&text=${query}&per_page=5`;
 
-  fetch(flickrEndpoint)
-    .then((response) => response.json())
-    .then((data) => {
-      if (
-        data &&
-        data.photos &&
-        data.photos.photo &&
-        data.photos.photo.length > 0
-      ) {
-        const photos = data.photos.photo;
-        photosContainer.innerHTML = "";
-        const photo = photos[0];
-        if (photo && photo.server && photo.id && photo.secret) {
+    fetch(flickrEndpoint)
+      .then((response) => response.json())
+      .then(
+        (data) => {
+          if (!data) {
+            return;
+          }
+          const photos = data.photos.photo;
+          photosContainer.innerHTML = "";
+          console.log(query);
+          const photo = photos[0];
+          // photo_positon++;
+
           const imgUrl = `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`;
+
           const img = document.createElement("img");
-          img.className = "photo-size";
           img.src = imgUrl;
           card.appendChild(img);
           const cardSection = document.createElement("div");
           card.appendChild(cardSection);
           photosContainer.appendChild(card);
+
+          img_return(img);
         }
-      } else {
-        console.log("no photo data on Flickr");
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+        // }
+      )
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
 }
 
 function storeFavourite() {
@@ -217,11 +223,10 @@ function renderfavourites() {
   for (var i = 0; i < favourite.length; i++) {
     var favourites = favourite[i];
     console.log(favourites);
-    var input = document.createElement("input");
-    input.value = favourites;
+    var input = document.createElement("li");
+    input.innerHTML = favourites;
     input.setAttribute("id", favourites);
-    input.setAttribute("type", "button");
-    input.setAttribute("class", "button");
+    input.setAttribute("class", "list-group-item");
     input.setAttribute("onClick", "reply_click(this.id)");
     favouritesList.appendChild(input);
   }

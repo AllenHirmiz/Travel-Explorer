@@ -1,44 +1,87 @@
 .small-6{
-    /* background-color: aqua; */
-    border: 1px solid black;
+  /* background-color: aqua; */
+  border: 1px solid black;
 }
 
 /* 
- * Always set the map height explicitly to define the size of the div element
- * that contains the map. 
- */
- #map {
-    height: 20rem;
-    width: 100%;
-  }
-  
-  /* 
-   * Optional: Makes the sample page fill the window. 
-   */
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: #E0F1F9;
-  }
-  #title{
-    color: #0088CC; /* Dark blue title color */
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    margin-top: 10px;
-  }
-  input[type="text"] {
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid #0077B6; /* Medium blue border color */
-    font-size: 1rem;
-    margin-right: 1rem;
-  }
-  .card-section{
-    width: 40rem;
-  }
+* Always set the map height explicitly to define the size of the div element
+* that contains the map. 
+*/
+#map {
+  height: 20rem;
+  width: 100%;
+}
 
-  .city-heading {
-    text-align: center;
-  }
+/* 
+ * Optional: Makes the sample page fill the window. 
+ */
+html,
+body {
+  height: 100%;
+  margin-left: 2%;
+  margin-right: 2%;
+  padding: 0;
+  background-color: #E0F1F9;
+}
+#title{
+  color: #0088CC; /* Dark blue title color */
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  margin-top: 10px;
+}
+input[type="text"] {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #0077B6; /* Medium blue border color */
+  font-size: 1rem;
+  margin-right: 1rem;
+}
+.card-section{
+  width: 40rem;
+}
+
+.city-heading {
+  text-align: center;
+}
+
+
+.page-center {
+  margin-top: 30%;
+}
+
+.button {
+  margin: 0 1rem 1rem 1rem;
+}
+
+ol li:hover {
+  background-color: #ccc;
+}
+
+
+.list-group {
+margin-bottom: 1rem;
+border: 1px solid #e6e6e6;
+border-radius: 0;
+background: #fefefe;
+box-shadow: none;
+overflow: hidden;
+color: #0a0a0a;
+}
+
+.list-group > :last-child {
+margin-bottom: 0;
+}
+
+.list-group-item {
+padding: 1rem;
+border-bottom: 1px solid #e6e6e6;
+}
+
+.list-group-item > :last-child {
+margin-bottom: 0;
+border-bottom: none;
+}
+
+.list-group-item:hover, .list-group-item:focus {
+background-color: #e6e6e6;
+}
