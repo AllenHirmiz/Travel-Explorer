@@ -27,14 +27,20 @@
       <div class="grid-container">
         <div class="grid-x grid-padding-x align-center">
           <div class="medium-6 cell">
+            <input
+              id ="city-input"
+              class="city-input"
+              type="text"
+              placeholder="Enter your destination"
+            />
 
-            <input id ="city-input" class="city-input" type="text" placeholder="Enter your destination" />
           </div>
           <p class="error-handler"></p>
           <input  id="search" type="submit" class="button" value="Search" />
         </div>
       </div>
     </form>
+    
 
     <!-- favourite section -->
 
@@ -42,6 +48,9 @@
       <div class="searched-city">
         <h2 id="city-heading" class="city-heading"></h2>
       </div>
+      
+      <div id="map"></div>
+      
       <div class="grid-x grid-padding-x align-center">
         <input type="button" id="add-favourite" data-open="add-favourite-modal" class="button" value="Add to Favourite" />
         <input id="view-favourite" type="button" class="button" data-open="select-favourite-modal" value="Select From Favourites" />
@@ -49,7 +58,7 @@
 
 
     </div>
-
+    
 
 
     <div class="reveal" id="add-favourite-modal" data-reveal>
@@ -60,15 +69,16 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-
-
+    
     <div class="reveal" id="select-favourite-modal" data-reveal>
       <ol id="favourite-list" class="search-form"></ol>
       <button id="close-button" class="close-button" data-close aria-label="Close modal" type="button">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-
+    
+    
+    
 
     <!-- grid -->
     <div id="mainContainer" class="grid-container full hide">
@@ -80,11 +90,6 @@
             <div class="grid-x grid-margin-x small-up-2 medium-up-3">
               <!-- result -->
               <div class="card">
-                <div id="map"></div>
-              </div>
-              <!-- end of result -->
-              <!-- result -->
-              <div class="card">
                 <div class="card-divider">
                   <h4 class="attractions-name"></h4>
                 </div>
@@ -109,6 +114,7 @@
                 </div>
               </div>
               <!-- end of result -->
+
               <!-- result -->
               <div class="card">
                 <div class="card-divider">

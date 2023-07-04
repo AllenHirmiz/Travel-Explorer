@@ -37,7 +37,19 @@
   }
   .card-section{
     width: 40rem;
+    height: 15rem;
   }
+
+.map-show-transition{
+  transition: opacity 0.5s ease-in;
+  display: flex;
+}
+.photo-size{
+  height: 19.2rem;
+  object-fit: cover;
+  margin-bottom: 1rem;
+
+}
 
   .city-heading {
     text-align: center;
