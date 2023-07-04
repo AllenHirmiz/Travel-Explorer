@@ -59,7 +59,7 @@
 
     <div class="reveal" id="select-favourite-modal" data-reveal>
       <ol id="favourite-list" class="search-form"></ol>
-      <button class="close-button" data-close aria-label="Close modal" type="button">
+      <button id="close-button" class="close-button" data-close aria-label="Close modal" type="button">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -163,6 +163,7 @@
           
           document.getElementById("city-input").value = clicked_id;
           document.getElementById("search").click();
+          document.getElementById("close-button").click();
 
       }
       </script>
