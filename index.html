@@ -37,7 +37,7 @@
     <!-- favourite section -->
     <div class="grid-container">
       <div class="searched-city">
-        <h2 class="city-heading">Sydney</h2>
+        <h2 id="city-heading" class="city-heading"></h2>
       </div>
       <div class="grid-x grid-padding-x align-center">
         <input type="button" id="add-favourite" data-open="add-favourite-modal" class="button" value="Add to Favourite" />
@@ -49,8 +49,9 @@
 
 
     <div class="reveal" id="add-favourite-modal" data-reveal>
-      <h1>Sydney</h1>
+      <h1 id="modal-heading"></h1>
       <p class="lead">Is added to favourite section.</p>
+      <input type="button" data-close class="button" value="Ok" />
       <button class="close-button" data-close aria-label="Close modal" type="button">
         <span aria-hidden="true">&times;</span>
       </button>

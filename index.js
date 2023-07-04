@@ -14,6 +14,8 @@ const photosContainer = document.getElementById("photos-container");
 var addFavourite = document.getElementById("add-favourite");
 var favouritesList = document.getElementById("favourite-list");
 var viewFavourite = document.getElementById("view-favourite");
+const cityHeading = document.getElementById("city-heading");
+const modalHeading = document.getElementById("modal-heading");
 
 let map;
 let service;
@@ -33,6 +35,8 @@ function initMap() {
 
   searchButton.addEventListener("click", function (event) {
     event.preventDefault();
+    cityHeading.innerHTML = cityInput.value;
+    modalHeading.innerHTML = cityInput.value;
     const query = cityInput.value; // Get the value of the input field
     // geocoder gets attractions from query
     const geocoder = new google.maps.Geocoder();
