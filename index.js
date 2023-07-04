@@ -11,6 +11,7 @@ const attractionWebsiteEl = document.querySelectorAll(".attractions-website");
 const attractionRatingEl = document.querySelectorAll(".attractions-rating");
 const photosContainer = document.getElementById("photos-container");
 const mainContainerEl = document.getElementById("mainContainer");
+const mapEl = document.getElementById("map");
 
 var addFavourite = document.getElementById("add-favourite");
 var favouritesList = document.getElementById("favourite-list");
@@ -116,6 +117,8 @@ function initMap() {
       }
     });
     mainContainerEl.classList.remove("hide");
+    mapEl.classList.remove("hide");
+    addFavourite.classList.remove("hide");
   });
 }
 function createMarker(place) {

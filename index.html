@@ -36,9 +36,6 @@
               type="text"
               placeholder="Enter your destination"
             />
-
-
-            <input id ="city-input" class="city-input" type="text" placeholder="Enter your destination" />
           </div>
           <p class="error-handler"></p>
           <input id="search" type="submit" class="button" value="Search" />
@@ -52,12 +49,15 @@
       <div class="searched-city">
         <h2 id="city-heading" class="city-heading"></h2>
       </div>
+      <div id="map" class="card hide">
+        <div id="map"></div>
+      </div>
       <div class="grid-x grid-padding-x align-center">
         <input
           type="button"
           id="add-favourite"
           data-open="add-favourite-modal"
-          class="button"
+          class="button mainContainer hide"
           value="Add to Favourite"
         />
         <input
@@ -102,11 +102,6 @@
           <h2 class="text-center">Popular attractions</h2>
           <div class="grid-container">
             <div class="grid-x grid-margin-x small-up-2 medium-up-3">
-              <!-- result -->
-              <div class="card">
-                <div id="map"></div>
-              </div>
-              <!-- end of result -->
               <!-- result -->
               <div class="card">
                 <div class="card-divider">
