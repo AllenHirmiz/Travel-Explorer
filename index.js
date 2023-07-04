@@ -10,16 +10,17 @@ const attractionWebsiteEl = document.querySelectorAll(".attractions-website");
 const attractionRatingEl = document.querySelectorAll(".attractions-rating");
 const photosContainer = document.getElementById("photos-container");
 const mainContainerEl = document.getElementById("mainContainer");
+const mapShow = document.getElementById("map");
 
 let map;
 let service;
 let infowindow;
-
 var photo_positon = 0;
+mapShow.style.opacity = "0";
 
 function initMap() {
   const sydney = new google.maps.LatLng(-33.867, 151.195);
-
+  ("");
   infowindow = new google.maps.InfoWindow();
   map = new google.maps.Map(document.getElementById("map"), {
     center: sydney,
@@ -28,6 +29,10 @@ function initMap() {
 
   searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
+    mapShow.style.opacity = "0";
+    mapShow.classList.add("map-show-transition");
+    mapShow.style.opacity = "1";
+
     const query = cityInput.value; // Get the value of the input field
     // geocoder gets attractions from query
     const geocoder = new google.maps.Geocoder();
@@ -58,8 +63,7 @@ function initMap() {
               createMarker(place);
               console.log("Before :" + place.name);
               // console.log(query + " " + place.name);
-              
-              
+
               service.getDetails(
                 {
                   placeId: place.place_id,
@@ -77,9 +81,7 @@ function initMap() {
                     errorHandler.innerHTML = "";
                     // console.log(`Attraction ${i + 1}: ${place.name}`);
                     // display attraction results
-                    attractionNameEl[i].innerHTML = ` ${
-                      place.name
-                    }`;
+                    attractionNameEl[i].innerHTML = ` ${place.name}`;
                     searchFlickrImages(query + " " + place.name);
                     attractionAddressEl[
                       i
@@ -127,38 +129,35 @@ card.className = "card";
 const flickrAPIKey = "fe1fb057d724fc26c393238213247861";
 
 function searchFlickrImages(query) {
-  return new Promise((img_return) => {
-    const flickrEndpoint = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${flickrAPIKey}&radius=1&format=json&nojsoncallback=1&text=${query}&per_page=5`;
+  const flickrEndpoint = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${flickrAPIKey}&radius=1&format=json&nojsoncallback=1&text=${query}&per_page=5`;
 
-    fetch(flickrEndpoint)
-      .then((response) => response.json())
-      .then(
-        (data) => {
-          if (!data) {
-            return;
-          }
-          const photos = data.photos.photo;
-          photosContainer.innerHTML = "";
-          console.log(query);
-          const photo = photos[0];
-          // photo_positon++;
-
+  fetch(flickrEndpoint)
+    .then((response) => response.json())
+    .then((data) => {
+      if (
+        data &&
+        data.photos &&
+        data.photos.photo &&
+        data.photos.photo.length > 0
+      ) {
+        const photos = data.photos.photo;
+        photosContainer.innerHTML = "";
+        const photo = photos[0];
+        if (photo && photo.server && photo.id && photo.secret) {
           const imgUrl = `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`;
-
           const img = document.createElement("img");
+          img.className = "photo-size";
           img.src = imgUrl;
           card.appendChild(img);
           const cardSection = document.createElement("div");
-          cardSection.className = "card-section";
           card.appendChild(cardSection);
           photosContainer.appendChild(card);
-
-          img_return(img);
         }
-        // }
-      )
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  });
+      } else {
+        console.log("no photo data on Flickr");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
