@@ -75,14 +75,6 @@ function initMap() {
               console.log("Before :" + place.name);
               // console.log(query + " " + place.name);
 
-              const img = await searchFlickrImages(query + " " + place.name);
-              card.appendChild(img);
-              const cardSection = document.createElement("div");
-              cardSection.className = "card-section";
-              card.appendChild(cardSection);
-              photosContainer.appendChild(card);
-              console.log("After: " + place.name);
-
               service.getDetails(
                 {
                   placeId: place.place_id,
@@ -100,10 +92,15 @@ function initMap() {
                     errorHandler.innerHTML = "";
                     // console.log(`Attraction ${i + 1}: ${place.name}`);
                     // display attraction results
+<<<<<<< Updated upstream
                     
                     attractionNameEl[i].innerHTML = ` ${place.name}`;
                     searchFlickrImages(query + " " + place.name);
 
+=======
+                    attractionNameEl[i].innerHTML = ` ${place.name}`;
+                    searchFlickrImages(query + " " + place.name);
+>>>>>>> Stashed changes
                     attractionAddressEl[
                       i
                     ].innerHTML = `Address: ${result.formatted_address}`;
@@ -173,8 +170,11 @@ function searchFlickrImages(query) {
           const cardSection = document.createElement("div");
           card.appendChild(cardSection);
           photosContainer.appendChild(card);
+<<<<<<< Updated upstream
           img_return(img);
 
+=======
+>>>>>>> Stashed changes
         }
       } else {
         console.log("no photo data on Flickr");
@@ -185,15 +185,13 @@ function searchFlickrImages(query) {
     });
 }
 
-
-
 function storeFavourite() {
   // Stringify and set key in localStorage to Favourite array
   localStorage.setItem("favourite", JSON.stringify(favourite));
 }
 
 // Add submit event to form
-addFavourite.addEventListener("click", function(event) {
+addFavourite.addEventListener("click", function (event) {
   event.preventDefault();
 
   var favouriteText = cityInput.value.trim();
@@ -210,12 +208,10 @@ addFavourite.addEventListener("click", function(event) {
   // Store updated Favourite in localStorage, re-render the list
   storeFavourite();
 
-  console.log(localStorage)
-
+  console.log(localStorage);
 });
 
-
-viewFavourite.addEventListener("click", function(event) {
+viewFavourite.addEventListener("click", function (event) {
   event.preventDefault();
   var storedFavourite = JSON.parse(localStorage.getItem("favourite"));
 
@@ -224,9 +220,7 @@ viewFavourite.addEventListener("click", function(event) {
     favourite = storedFavourite;
   }
   renderfavourites();
-  
 });
-
 
 function renderfavourites() {
   favouritesList.innerHTML = "";
@@ -234,8 +228,8 @@ function renderfavourites() {
   // Render a new li for each favourite
   for (var i = 0; i < favourite.length; i++) {
     var favourites = favourite[i];
-    console.log(favourites)
-    var input = document.createElement("input")
+    console.log(favourites);
+    var input = document.createElement("input");
     input.value = favourites;
     input.setAttribute("id", favourites);
     input.setAttribute("type", "button");
@@ -243,5 +237,4 @@ function renderfavourites() {
     input.setAttribute("onClick", "reply_click(this.id)");
     favouritesList.appendChild(input);
   }
-  
 }
