@@ -1,5 +1,4 @@
 const searchForm = document.querySelector(".search-form");
-const searchButton = document.getElementById("search");
 const cityInput = document.querySelector(".city-input");
 const errorHandler = document.querySelector(".error-handler");
 const attractionNameEl = document.querySelectorAll(".attractions-name");
@@ -13,18 +12,10 @@ const photosContainer = document.getElementById("photos-container");
 const mainContainerEl = document.getElementById("mainContainer");
 const mapShow = document.getElementById("map");
 
-var addFavourite = document.getElementById("add-favourite");
-var favouritesList = document.getElementById("favourite-list");
-var viewFavourite = document.getElementById("view-favourite");
-const cityHeading = document.getElementById("city-heading");
-const modalHeading = document.getElementById("modal-heading");
-
 let map;
 let service;
 let infowindow;
 var photo_positon = 0;
-var favourite = [];
-
 mapShow.style.opacity = "0";
 
 function initMap() {
@@ -36,13 +27,11 @@ function initMap() {
     zoom: 10,
   });
 
-  searchButton.addEventListener("click", function (event) {
+  searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
     mapShow.style.opacity = "0";
     mapShow.classList.add("map-show-transition");
     mapShow.style.opacity = "1";
-    cityHeading.innerHTML = cityInput.value;
-    modalHeading.innerHTML = cityInput.value;
 
     const query = cityInput.value; // Get the value of the input field
     // geocoder gets attractions from query
@@ -75,14 +64,6 @@ function initMap() {
               console.log("Before :" + place.name);
               // console.log(query + " " + place.name);
 
-              const img = await searchFlickrImages(query + " " + place.name);
-              card.appendChild(img);
-              const cardSection = document.createElement("div");
-              cardSection.className = "card-section";
-              card.appendChild(cardSection);
-              photosContainer.appendChild(card);
-              console.log("After: " + place.name);
-
               service.getDetails(
                 {
                   placeId: place.place_id,
@@ -100,10 +81,8 @@ function initMap() {
                     errorHandler.innerHTML = "";
                     // console.log(`Attraction ${i + 1}: ${place.name}`);
                     // display attraction results
-                    
                     attractionNameEl[i].innerHTML = ` ${place.name}`;
                     searchFlickrImages(query + " " + place.name);
-
                     attractionAddressEl[
                       i
                     ].innerHTML = `Address: ${result.formatted_address}`;
@@ -173,8 +152,6 @@ function searchFlickrImages(query) {
           const cardSection = document.createElement("div");
           card.appendChild(cardSection);
           photosContainer.appendChild(card);
-          img_return(img);
-
         }
       } else {
         console.log("no photo data on Flickr");
@@ -183,65 +160,4 @@ function searchFlickrImages(query) {
     .catch((error) => {
       console.error("Error:", error);
     });
-}
-
-
-
-function storeFavourite() {
-  // Stringify and set key in localStorage to Favourite array
-  localStorage.setItem("favourite", JSON.stringify(favourite));
-}
-
-// Add submit event to form
-addFavourite.addEventListener("click", function(event) {
-  event.preventDefault();
-
-  var favouriteText = cityInput.value.trim();
-
-  // Return from function early if submitted Favourite is blank
-  if (favouriteText === "") {
-    return;
-  }
-
-  // Add new FavouriteText to Favourite array, clear the input
-  favourite.push(favouriteText);
-  cityInput.value = "";
-
-  // Store updated Favourite in localStorage, re-render the list
-  storeFavourite();
-
-  console.log(localStorage)
-
-});
-
-
-viewFavourite.addEventListener("click", function(event) {
-  event.preventDefault();
-  var storedFavourite = JSON.parse(localStorage.getItem("favourite"));
-
-  // If Favourite were retrieved from localStorage, update the Favourite array to it
-  if (storedFavourite !== null) {
-    favourite = storedFavourite;
-  }
-  renderfavourites();
-  
-});
-
-
-function renderfavourites() {
-  favouritesList.innerHTML = "";
-
-  // Render a new li for each favourite
-  for (var i = 0; i < favourite.length; i++) {
-    var favourites = favourite[i];
-    console.log(favourites)
-    var input = document.createElement("input")
-    input.value = favourites;
-    input.setAttribute("id", favourites);
-    input.setAttribute("type", "button");
-    input.setAttribute("class", "button");
-    input.setAttribute("onClick", "reply_click(this.id)");
-    favouritesList.appendChild(input);
-  }
-  
 }
