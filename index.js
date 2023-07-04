@@ -11,6 +11,7 @@ const favoritesList = document.getElementById("favorites-list");
 const clearFavoritesBtn = document.getElementById("clear-favorites");
 const searchForm = document.getElementById("search-form");
 const photosContainer = document.getElementById("photos-container");
+
 const attractionNameEl = document.getElementsByClassName("attractions-name");
 const attractionAddressEl = document.getElementsByClassName(
   "attractions-address"
@@ -24,15 +25,26 @@ const attractionWebsiteEl = document.getElementsByClassName(
 const attractionRatingEl =
   document.getElementsByClassName("attractions-rating");
 
+const mainContainerEl = document.getElementById("mainContainer");
+const mapShow = document.getElementById("map");
+
+var addFavourite = document.getElementById("add-favourite");
+var favouritesList = document.getElementById("favourite-list");
+var viewFavourite = document.getElementById("view-favourite");
+const cityHeading = document.getElementById("city-heading");
+const modalHeading = document.getElementById("modal-heading");
+
+
 let map;
 let service;
 let infowindow;
-
 var photo_positon = 0;
+
+mapShow.style.opacity = "0";
 
 function initMap() {
   const sydney = new google.maps.LatLng(-33.867, 151.195);
-
+  ("");
   infowindow = new google.maps.InfoWindow();
   map = new google.maps.Map(document.getElementById("map"), {
     center: sydney,
@@ -41,6 +53,15 @@ function initMap() {
 
   searchForm?.addEventListener("submit", function (event) {
     event.preventDefault();
+
+
+    mapShow.style.opacity = "0";
+    mapShow.classList.add("map-show-transition");
+    mapShow.style.opacity = "1";
+    cityHeading.innerHTML = cityInput.value;
+    modalHeading.innerHTML = cityInput.value;
+
+
     const query = cityInput.value; // Get the value of the input field
     // geocoder gets attractions from query
     const geocoder = new google.maps.Geocoder();
@@ -88,10 +109,13 @@ function initMap() {
                     errorHandler.innerHTML = "";
                     // console.log(`Attraction ${i + 1}: ${place.name}`);
                     // display attraction results
-                    attractionNameEl[i].innerHTML = `Attraction ${i + 1}: ${
-                      place.name
-                    }`;
+
+
+                    
+                    attractionNameEl[i].innerHTML = ` ${place.name}`;
                     searchFlickrImages(query + " " + place.name);
+
+
                     attractionAddressEl[
                       i
                     ].innerHTML = `Address: ${result.formatted_address}`;
@@ -138,37 +162,46 @@ card.className = "card";
 const flickrAPIKey = "fe1fb057d724fc26c393238213247861";
 
 function searchFlickrImages(query) {
-  return new Promise((img_return) => {
-    const flickrEndpoint = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${flickrAPIKey}&radius=1&format=json&nojsoncallback=1&text=${query}&per_page=5`;
 
-    fetch(flickrEndpoint)
-      .then((response) => response.json())
-      .then(
-        (data) => {
-          const photos = data.photos.photo;
-          photosContainer.innerHTML = "";
-          console.log(query);
-          const photo = photos[0];
-          // photo_positon++;
 
-          const imgUrl = `https://live.staticflickr.com/${photo?.server}/${photo?.id}_${photo?.secret}.jpg`;
+
+  const flickrEndpoint = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${flickrAPIKey}&radius=1&format=json&nojsoncallback=1&text=${query}&per_page=5`;
+
+  fetch(flickrEndpoint)
+    .then((response) => response.json())
+    .then((data) => {
+      if (
+        data &&
+        data.photos &&
+        data.photos.photo &&
+        data.photos.photo.length > 0
+      ) {
+        const photos = data.photos.photo;
+        photosContainer.innerHTML = "";
+        const photo = photos[0];
+        if (photo && photo.server && photo.id && photo.secret) {
+          const imgUrl = `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`;
 
           const img = document.createElement("img");
+          img.className = "photo-size";
           img.src = imgUrl;
           card.appendChild(img);
           const cardSection = document.createElement("div");
-          cardSection.className = "card-section";
+
+
           card.appendChild(cardSection);
           photosContainer.appendChild(card);
 
           img_return(img);
+
         }
-        // }
-      )
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  });
+      } else {
+        console.log("no photo data on Flickr");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
 
 // Handle form submission

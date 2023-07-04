@@ -1,3 +1,49 @@
+  /* 
+   * Optional: Makes the sample page fill the window. 
+   */
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #E0F1F9;
+  }
+  #title{
+    color: #0088CC; /* Dark blue title color */
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    margin-top: 10px;
+  }
+  input[type="text"] {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #0077B6; /* Medium blue border color */
+    font-size: 1rem;
+    margin-right: 1rem;
+  }
+  .card-section{
+    width: 40rem;
+    height: 15rem;
+  }
+
+.map-show-transition{
+  transition: opacity 0.5s ease-in;
+  display: flex;
+}
+.photo-size{
+  height: 19.2rem;
+  object-fit: cover;
+  margin-bottom: 1rem;
+
+}
+
+  .city-heading {
+    text-align: center;
+  }
+
+
+
+
 .small-6{
   background-color: aqua;
 }
@@ -11,21 +57,7 @@
   width: 100%;
 }
 
-/* 
- * Optional: Makes the sample page fill the window. 
- */
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-.card-section{
-  width: 40rem;
-}
 
-.city-heading {
-  text-align: center;
 }
 /* Modal */
 .modal {
@@ -72,3 +104,9 @@ margin-top: 20px;
 text-align: center;
 
 }
+
+ #map {
+    height: 20rem;
+    width: 100%;
+  }
+  
