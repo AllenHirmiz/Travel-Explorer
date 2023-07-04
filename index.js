@@ -69,14 +69,6 @@ function initMap() {
               console.log("Before :" + place.name);
               // console.log(query + " " + place.name);
 
-              const img = await searchFlickrImages(query + " " + place.name);
-              card.appendChild(img);
-              const cardSection = document.createElement("div");
-              cardSection.className = "card-section";
-              card.appendChild(cardSection);
-              photosContainer.appendChild(card);
-              console.log("After: " + place.name);
-
               service.getDetails(
                 {
                   placeId: place.place_id,
@@ -94,6 +86,10 @@ function initMap() {
                     errorHandler.innerHTML = "";
                     // console.log(`Attraction ${i + 1}: ${place.name}`);
                     // display attraction results
+                    
+                    attractionNameEl[i].innerHTML = ` ${place.name}`;
+                    searchFlickrImages(query + " " + place.name);
+
                     attractionNameEl[i].innerHTML = ` ${
                       place.name
                     }`;
@@ -163,6 +159,10 @@ function searchFlickrImages(query) {
 
           const img = document.createElement("img");
           img.src = imgUrl;
+          card.appendChild(img);
+          const cardSection = document.createElement("div");
+          card.appendChild(cardSection);
+          photosContainer.appendChild(card);
 
           img_return(img);
         }
@@ -174,15 +174,13 @@ function searchFlickrImages(query) {
   });
 }
 
-
-
 function storeFavourite() {
   // Stringify and set key in localStorage to Favourite array
   localStorage.setItem("favourite", JSON.stringify(favourite));
 }
 
 // Add submit event to form
-addFavourite.addEventListener("click", function(event) {
+addFavourite.addEventListener("click", function (event) {
   event.preventDefault();
 
   var favouriteText = cityInput.value.trim();
@@ -199,12 +197,10 @@ addFavourite.addEventListener("click", function(event) {
   // Store updated Favourite in localStorage, re-render the list
   storeFavourite();
 
-  console.log(localStorage)
-
+  console.log(localStorage);
 });
 
-
-viewFavourite.addEventListener("click", function(event) {
+viewFavourite.addEventListener("click", function (event) {
   event.preventDefault();
   var storedFavourite = JSON.parse(localStorage.getItem("favourite"));
 
@@ -213,9 +209,7 @@ viewFavourite.addEventListener("click", function(event) {
     favourite = storedFavourite;
   }
   renderfavourites();
-  
 });
-
 
 function renderfavourites() {
   favouritesList.innerHTML = "";
@@ -223,8 +217,8 @@ function renderfavourites() {
   // Render a new li for each favourite
   for (var i = 0; i < favourite.length; i++) {
     var favourites = favourite[i];
-    console.log(favourites)
-    var input = document.createElement("input")
+    console.log(favourites);
+    var input = document.createElement("input");
     input.value = favourites;
     input.setAttribute("id", favourites);
     input.setAttribute("type", "button");
@@ -232,5 +226,4 @@ function renderfavourites() {
     input.setAttribute("onClick", "reply_click(this.id)");
     favouritesList.appendChild(input);
   }
-  
 }
