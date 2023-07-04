@@ -1,96 +1,74 @@
 .small-6{
-    /* background-color: aqua; */
-    border: 1px solid black;
+  background-color: aqua;
 }
 
 /* 
- * Always set the map height explicitly to define the size of the div element
- * that contains the map. 
- */
- #map {
-    height: 20rem;
-    width: 100%;
-  }
-  
-  /* 
-   * Optional: Makes the sample page fill the window. 
-   */
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-
-
-    background-color: #E0F1F9;
-  }
-  #title{
-    color: #0088CC; /* Dark blue title color */
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    margin-top: 10px;
-  }
-  input[type="text"] {
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid #0077B6; /* Medium blue border color */
-    font-size: 1rem;
-    margin-right: 1rem;
-
-  }
-  .card-section{
-    width: 40rem;
-  }
-
-  .city-heading {
-    text-align: center;
-
-  }
-  /* Modal */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
+* Always set the map height explicitly to define the size of the div element
+* that contains the map. 
+*/
+#map {
+  height: 20rem;
   width: 100%;
+}
+
+/* 
+ * Optional: Makes the sample page fill the window. 
+ */
+html,
+body {
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
+  margin: 0;
+  padding: 0;
+}
+.card-section{
+  width: 40rem;
+}
+
+.city-heading {
+  text-align: center;
+}
+/* Modal */
+.modal {
+display: none;
+position: fixed;
+z-index: 1;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 500px;
+background-color: #fefefe;
+margin: 15% auto;
+padding: 20px;
+border: 1px solid #888;
+width: 80%;
+max-width: 500px;
 }
 
 .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
+color: #aaa;
+float: right;
+font-size: 28px;
+font-weight: bold;
+cursor: pointer;
 }
 
 .close:hover,
 .close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+color: #000;
+text-decoration: none;
+cursor: pointer;
 }
 
 .favorites-list {
-  margin-top: 20px;
+margin-top: 20px;
 }
 
 .city-name-input {
-  text-align: center;
-  
+text-align: center;
+
 }
-
-
-

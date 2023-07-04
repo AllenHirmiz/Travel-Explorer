@@ -1,4 +1,3 @@
-
 const cityInput = document.querySelector(".city-input");
 const cityName = document.getElementById("city-name");
 const addToFavoriteBtn = document.querySelector(".add-to-favorite");
@@ -13,39 +12,23 @@ const clearFavoritesBtn = document.getElementById("clear-favorites");
 const searchForm = document.getElementById("search-form");
 const photosContainer = document.getElementById("photos-container");
 const attractionNameEl = document.getElementsByClassName("attractions-name");
-const attractionAddressEl = document.getElementsByClassName("attractions-address");
-const attractionPhoneNumberEl = document.getElementsByClassName("attractions-phone-number");
-const attractionWebsiteEl = document.getElementsByClassName("attractions-website");
-const attractionRatingEl = document.getElementsByClassName("attractions-rating");
-
-const searchForm = document.querySelector(".search-form");
-const searchButton = document.getElementById("search");
-const cityInput = document.querySelector(".city-input");
-const errorHandler = document.querySelector(".error-handler");
-const attractionNameEl = document.querySelectorAll(".attractions-name");
-const attractionPhoneNumberEl = document.querySelectorAll(
-  ".attractions-phone-number"
+const attractionAddressEl = document.getElementsByClassName(
+  "attractions-address"
 );
-const attractionAddressEl = document.querySelectorAll(".attractions-address");
-const attractionWebsiteEl = document.querySelectorAll(".attractions-website");
-const attractionRatingEl = document.querySelectorAll(".attractions-rating");
-const photosContainer = document.getElementById("photos-container");
-const mainContainerEl = document.getElementById("mainContainer");
-
-var addFavourite = document.getElementById("add-favourite");
-var favouritesList = document.getElementById("favourite-list");
-var viewFavourite = document.getElementById("view-favourite");
-const cityHeading = document.getElementById("city-heading");
-const modalHeading = document.getElementById("modal-heading");
-
+const attractionPhoneNumberEl = document.getElementsByClassName(
+  "attractions-phone-number"
+);
+const attractionWebsiteEl = document.getElementsByClassName(
+  "attractions-website"
+);
+const attractionRatingEl =
+  document.getElementsByClassName("attractions-rating");
 
 let map;
 let service;
 let infowindow;
 
 var photo_positon = 0;
-var favourite = [];
-
 
 function initMap() {
   const sydney = new google.maps.LatLng(-33.867, 151.195);
@@ -56,15 +39,8 @@ function initMap() {
     zoom: 10,
   });
 
-
   searchForm?.addEventListener("submit", function (event) {
     event.preventDefault();
-
-  searchButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    cityHeading.innerHTML = cityInput.value;
-    modalHeading.innerHTML = cityInput.value;
-
     const query = cityInput.value; // Get the value of the input field
     // geocoder gets attractions from query
     const geocoder = new google.maps.Geocoder();
@@ -90,22 +66,10 @@ function initMap() {
             card.innerHTML = "";
             for (let i = 0; i < attractionsCount; i++) {
               const place = results[i];
-
-              console.log(place.name);
               attractions.push(place.name);
               createMarker(place);
               console.log("Before :" + place.name);
               // console.log(query + " " + place.name);
-
-
-              const img = await searchFlickrImages(query + " " + place.name);
-              card.appendChild(img);
-              const cardSection = document.createElement("div");
-              cardSection.className = "card-section";
-              card.appendChild(cardSection);
-              photosContainer.appendChild(card);
-              console.log("After: " + place.name);
-
 
               service.getDetails(
                 {
@@ -124,16 +88,10 @@ function initMap() {
                     errorHandler.innerHTML = "";
                     // console.log(`Attraction ${i + 1}: ${place.name}`);
                     // display attraction results
-
                     attractionNameEl[i].innerHTML = `Attraction ${i + 1}: ${
                       place.name
                     }`;
                     searchFlickrImages(query + " " + place.name);
-
-                    attractionNameEl[i].innerHTML = ` ${
-                      place.name
-                    }`;
-
                     attractionAddressEl[
                       i
                     ].innerHTML = `Address: ${result.formatted_address}`;
@@ -156,9 +114,9 @@ function initMap() {
         return;
       }
     });
-    mainContainerEl.classList.remove("hide");
   });
 }
+
 function createMarker(place) {
   if (!place.geometry || !place.geometry.location) return;
 
@@ -187,17 +145,11 @@ function searchFlickrImages(query) {
       .then((response) => response.json())
       .then(
         (data) => {
-
-
-          if (!data) {
-            return;
-          }
           const photos = data.photos.photo;
           photosContainer.innerHTML = "";
           console.log(query);
           const photo = photos[0];
           // photo_positon++;
-
 
           const imgUrl = `https://live.staticflickr.com/${photo?.server}/${photo?.id}_${photo?.secret}.jpg`;
 
@@ -209,12 +161,6 @@ function searchFlickrImages(query) {
           card.appendChild(cardSection);
           photosContainer.appendChild(card);
 
-          const imgUrl = `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`;
-
-          const img = document.createElement("img");
-          img.src = imgUrl;
-
-
           img_return(img);
         }
         // }
@@ -224,7 +170,6 @@ function searchFlickrImages(query) {
       });
   });
 }
-
 
 // Handle form submission
 function handleSubmit(event) {
@@ -326,65 +271,3 @@ function addFavorite(favorite) {
 function changeSearch(event) {
   cityName.innerText = event.target.value.trim();
 }
-
-
-
-function storeFavourite() {
-  // Stringify and set key in localStorage to Favourite array
-  localStorage.setItem("favourite", JSON.stringify(favourite));
-}
-
-// Add submit event to form
-addFavourite.addEventListener("click", function(event) {
-  event.preventDefault();
-
-  var favouriteText = cityInput.value.trim();
-
-  // Return from function early if submitted Favourite is blank
-  if (favouriteText === "") {
-    return;
-  }
-
-  // Add new FavouriteText to Favourite array, clear the input
-  favourite.push(favouriteText);
-  cityInput.value = "";
-
-  // Store updated Favourite in localStorage, re-render the list
-  storeFavourite();
-
-  console.log(localStorage)
-
-});
-
-
-viewFavourite.addEventListener("click", function(event) {
-  event.preventDefault();
-  var storedFavourite = JSON.parse(localStorage.getItem("favourite"));
-
-  // If Favourite were retrieved from localStorage, update the Favourite array to it
-  if (storedFavourite !== null) {
-    favourite = storedFavourite;
-  }
-  renderfavourites();
-  
-});
-
-
-function renderfavourites() {
-  favouritesList.innerHTML = "";
-
-  // Render a new li for each favourite
-  for (var i = 0; i < favourite.length; i++) {
-    var favourites = favourite[i];
-    console.log(favourites)
-    var input = document.createElement("input")
-    input.value = favourites;
-    input.setAttribute("id", favourites);
-    input.setAttribute("type", "button");
-    input.setAttribute("class", "button");
-    input.setAttribute("onClick", "reply_click(this.id)");
-    favouritesList.appendChild(input);
-  }
-  
-}
-
