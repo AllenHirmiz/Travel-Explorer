@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 .small-6{
   /* background-color: aqua; */
   border: 1px solid black;
@@ -21,7 +23,7 @@ body {
   margin-left: 2%;
   margin-right: 2%;
   padding: 0;
-  background-color: #E0F1F9;
+  background-color: #f4f8fc;
 }
 #title{
   color: #0088CC; /* Dark blue title color */
@@ -36,8 +38,57 @@ input[type="text"] {
   font-size: 1rem;
   margin-right: 1rem;
 }
+
+#mainContainer{
+margin-top: 60px;
+}
 .card-section{
   width: 40rem;
+}
+.card-divider{
+  background: #000000;
+}
+
+/* .card {
+  width: 300px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+} */
+
+.card h4 {
+  margin-top: 0;
+  font-size: 24px;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+
+.card p {
+  margin: 0;
+  font-size: 16px;
+  color: #666;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card .attractions-address {
+  font-weight: bold;
+  color: #333;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card .attractions-website a {
+  color: #007bff;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card .attractions-rating {
+  margin-top: 10px;
+  font-style: italic;
+  color: #666;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .city-heading {
