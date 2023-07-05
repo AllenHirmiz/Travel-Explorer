@@ -18,6 +18,7 @@ var favouritesList = document.getElementById("favourite-list");
 var viewFavourite = document.getElementById("view-favourite");
 const cityHeading = document.getElementById("city-heading");
 const modalHeading = document.getElementById("modal-heading");
+const titleEl = document.getElementById("title");
 
 let map;
 let service;
@@ -87,11 +88,13 @@ function initMap() {
                     errorHandler.innerHTML = "";
                     // console.log(`Attraction ${i + 1}: ${place.name}`);
                     // display attraction results
-
+                    
                     attractionNameEl[i].innerHTML = ` ${place.name}`;
                     searchFlickrImages(query + " " + place.name);
 
-                    attractionNameEl[i].innerHTML = ` ${place.name}`;
+                    attractionNameEl[i].innerHTML = ` ${
+                      place.name
+                    }`;
                     attractionAddressEl[
                       i
                     ].innerHTML = `Address: ${result.formatted_address}`;
@@ -117,6 +120,7 @@ function initMap() {
     mainContainerEl.classList.remove("hide");
     mapEl.classList.remove("hide");
     addFavourite.classList.remove("hide");
+    titleEl.classList.remove("page-center");
   });
 }
 function createMarker(place) {
@@ -217,11 +221,10 @@ function renderfavourites() {
   for (var i = 0; i < favourite.length; i++) {
     var favourites = favourite[i];
     console.log(favourites);
-    var input = document.createElement("input");
-    input.value = favourites;
+    var input = document.createElement("li");
+    input.innerHTML = favourites;
     input.setAttribute("id", favourites);
-    input.setAttribute("type", "button");
-    input.setAttribute("class", "button");
+    input.setAttribute("class", "list-group-item");
     input.setAttribute("onClick", "reply_click(this.id)");
     favouritesList.appendChild(input);
   }
