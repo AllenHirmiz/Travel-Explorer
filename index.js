@@ -89,8 +89,10 @@ function initMap() {
                     // console.log(`Attraction ${i + 1}: ${place.name}`);
                     // display attraction results
 
+
                     var website = result.website.split("?");
                     website = website[0];
+
                     
                     attractionNameEl[i].innerHTML = ` ${place.name}`;
                     searchFlickrImages(query + " " + place.name);

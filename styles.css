@@ -3,6 +3,7 @@
 .small-6{
   /* background-color: aqua; */
   border: 1px solid black;
+
 }
 
 /* 
@@ -23,6 +24,7 @@ body {
   margin-left: 2%;
   margin-right: 2%;
   padding: 0;
+
   background-color: #f4f8fc;
 }
 #title{
@@ -37,6 +39,10 @@ input[type="text"] {
   border: 1px solid #0077B6; /* Medium blue border color */
   font-size: 1rem;
   margin-right: 1rem;
+}
+
+.card-section{
+  width: 40rem;
 }
 
 #mainContainer{
