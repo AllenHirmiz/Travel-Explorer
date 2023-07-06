@@ -48,6 +48,10 @@ h2 {
   
 }
 
+.grid-margin-x {
+  margin: 0;
+}
+
 
 /* 
  * Optional: Makes the sample page fill the window. 

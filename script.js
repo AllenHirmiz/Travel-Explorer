@@ -1,6 +1,5 @@
 const searchForm = document.querySelector(".search-form");
-const searchButton = document.getElementById("search");
-const cityInput = document.querySelector(".city-input");
+const cityInput = document.getElementById("city-input");
 const errorHandler = document.querySelector(".error-handler");
 const attractionNameEl = document.querySelectorAll(".attractions-name");
 const attractionPhoneNumberEl = document.querySelectorAll(
@@ -13,21 +12,23 @@ const photosContainer = document.getElementById("photos-container");
 const mainContainerEl = document.getElementById("mainContainer");
 const mapEl = document.getElementById("map");
 
-var addFavourite = document.getElementById("add-favourite");
-var favouritesList = document.getElementById("favourite-list");
-var viewFavourite = document.getElementById("view-favourite");
-const cityHeading = document.getElementById("city-heading");
+const addFavourite = document.getElementById("add-favourite");
+const favouritesList = document.getElementById("favourite-list");
+const viewFavourite = document.getElementById("view-favourite");
+const cityHeading = document.querySelector(".city-heading");
 const modalHeading = document.getElementById("modal-heading");
 const titleEl = document.getElementById("title");
 const clearButton = document.getElementById("clear-all-favourites");
 
+// variables
 let map;
 let service;
 let infowindow;
+let photo_positon = 0;
+let favourite = [];
+mapEl.style.display = "none";
 
-var photo_positon = 0;
-var favourite = [];
-
+// init map
 function initMap() {
   const sydney = new google.maps.LatLng(-33.867, 151.195);
 
@@ -37,11 +38,16 @@ function initMap() {
     zoom: 10,
   });
 
-  searchButton.addEventListener("click", function (event) {
+  // searchForm submit
+  searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
+    mapEl.style.display = "flex";
     cityHeading.innerHTML = cityInput.value;
     modalHeading.innerHTML = cityInput.value;
-    const query = cityInput.value; // Get the value of the input field
+
+    // Get the value of the input field
+    const query = cityInput.value;
+
     // geocoder gets attractions from query
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ address: query }, (results, status) => {
@@ -54,24 +60,18 @@ function initMap() {
           fields: ["name", "rating", "user_ratings_total", "place_id"],
         };
         service = new google.maps.places.PlacesService(map);
+
+        // nearbyPlaceSearch gets place name and other details
         service.nearbySearch(request, async (results, status) => {
           if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-            // console.log("Query:", query); // Log the queried location
-            // console.log("Number of Results:", results.length);
-            // console.log("Tourist Attractions:");
-
             const attractions = [];
             const attractionsCount = Math.min(5, results.length);
             photosContainer.innerHTML = "";
             card.innerHTML = "";
             for (let i = 0; i < attractionsCount; i++) {
               const place = results[i];
-              console.log(place.name);
               attractions.push(place.name);
               createMarker(place);
-              console.log("Before :" + place.name);
-              // console.log(query + " " + place.name);
-
               service.getDetails(
                 {
                   placeId: place.place_id,
@@ -95,7 +95,6 @@ function initMap() {
 
                     attractionNameEl[i].innerHTML = ` ${place.name}`;
                     searchFlickrImages(query + " " + place.name);
-
                     attractionNameEl[i].innerHTML = ` ${place.name}`;
                     attractionAddressEl[
                       i
@@ -126,6 +125,7 @@ function initMap() {
     titleEl.classList.remove("page-center");
   });
 }
+// createMarker gets place markers on google maps
 function createMarker(place) {
   if (!place.geometry || !place.geometry.location) return;
 
@@ -146,6 +146,7 @@ card.className = "card";
 
 const flickrAPIKey = "fe1fb057d724fc26c393238213247861";
 
+// searFlickrImages returns images based on query and place.name
 function searchFlickrImages(query) {
   const flickrEndpoint = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${flickrAPIKey}&radius=1&format=json&nojsoncallback=1&text=${query}&per_page=5`;
 
