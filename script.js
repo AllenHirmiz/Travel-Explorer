@@ -17,7 +17,8 @@ const favouritesList = document.getElementById("favourite-list");
 const viewFavourite = document.getElementById("view-favourite");
 const cityHeading = document.querySelector(".city-heading");
 const modalHeading = document.getElementById("modal-heading");
-const titleEl = document.querySelector(".title");
+const titleEl = document.getElementById("title");
+const clearButton = document.getElementById("clear-all-favourites");
 
 // variables
 let map;
@@ -86,6 +87,9 @@ function initMap() {
                 (result, status) => {
                   if (status === google.maps.places.PlacesServiceStatus.OK) {
                     errorHandler.innerHTML = "";
+                    // console.log(`Attraction ${i + 1}: ${place.name}`);
+                    // display attraction results
+
                     var website = result.website.split("?");
                     website = website[0];
 
@@ -226,6 +230,15 @@ function renderfavourites() {
     input.setAttribute("id", favourites);
     input.setAttribute("class", "list-group-item");
     input.setAttribute("onClick", "reply_click(this.id)");
+
     favouritesList.appendChild(input);
   }
 }
+
+function clearLocalStorage() {
+  localStorage.clear();
+  favourite = [];
+  renderfavourites();
+}
+
+clearButton.addEventListener("click", clearLocalStorage);

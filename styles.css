@@ -6,6 +6,27 @@
 
 }
 
+h2 {
+  color: #ffffff;
+  font-weight: 600;
+  margin: 2%;
+  letter-spacing: 2PX;
+}
+
+.city-heading {
+  color: #0077B6;
+  padding-bottom: 2%;
+  text-transform: uppercase;
+}
+
+.grid-x {
+  padding: 2%;
+}
+
+.favourite-section {
+  background-color: #e9e6e6;
+}
+
 /* 
 * Always set the map height explicitly to define the size of the div element
 * that contains the map. 
@@ -15,27 +36,61 @@
   width: 100%;
 }
 
+.photo-size {
+  margin-bottom: 1%;
+  background-color: #0077B6;
+  color: #0077B6;
+  border-radius: 8px;
+}
+
+.photo-size .card {
+  background-color: #0077B6;
+  
+}
+
+.grid-margin-x {
+  margin: 0;
+}
+
+
 /* 
  * Optional: Makes the sample page fill the window. 
  */
 html,
 body {
   height: 100%;
-  margin-left: 2%;
-  margin-right: 2%;
   padding: 0;
-
-  background-color: #f4f8fc;
+  background-color: #e9e6e6;
 }
-.title{
-  color: #0088CC; /* Dark blue title color */
-  font-size: 2.5rem;
+
+.header {
+  background-color: #0077B6;
+  padding-top: 4%;
+  padding-bottom: 4%;
+}
+
+#search {
+  background-color: #ffffff;
+  color: #0077B6;
+  font-weight: 700;
+}
+
+#search:hover {
+  background-color: #37393b;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+#title{
+  color: #ffffff; /* Dark blue title color */
+  font-size: 3rem;
   margin-bottom: 2rem;
   margin-top: 10px;
+  font-weight: 700;
 }
 input[type="text"] {
   padding: 0.5rem;
-  border-radius: 5px;
+  border-radius: 8px;
   border: 1px solid #0077B6; /* Medium blue border color */
   font-size: 1rem;
   margin-right: 1rem;
@@ -46,22 +101,21 @@ input[type="text"] {
 }
 
 #mainContainer{
-margin-top: 60px;
+background-color: #0077B6;
 }
+
+.card {
+  border-radius: 8px;
+  border: 0;
+  background-color: #e9e6e6;
+}
+
 .card-section{
   width: 40rem;
 }
 .card-divider{
-  background: #000000;
+  background: #2f3133;
 }
-
-/* .card {
-  width: 300px;
-  border: 1px solid #ccc;
-  padding: 20px;
-  margin-bottom: 20px;
-  background-color: #f9f9f9;
-} */
 
 .card h4 {
   margin-top: 0;
@@ -108,6 +162,7 @@ margin-top: 60px;
 
 .button {
   margin: 0 1rem 1rem 1rem;
+  border-radius: 8px;
 }
 
 ol li:hover {
@@ -117,12 +172,12 @@ ol li:hover {
 
 .list-group {
 margin-bottom: 1rem;
-border: 1px solid #e6e6e6;
-border-radius: 0;
+border: 0px solid #e6e6e6;
 background: #fefefe;
 box-shadow: none;
 overflow: hidden;
 color: #0a0a0a;
+border-radius: 8px;
 }
 
 .list-group > :last-child {
@@ -132,6 +187,9 @@ margin-bottom: 0;
 .list-group-item {
 padding: 1rem;
 border-bottom: 1px solid #e6e6e6;
+cursor: pointer;
+border-radius: 8px;
+background-color: #7e92bd;
 }
 
 .list-group-item > :last-child {
@@ -140,5 +198,14 @@ border-bottom: none;
 }
 
 .list-group-item:hover, .list-group-item:focus {
-background-color: #e6e6e6;
+background-color: #0077B6;
+color: #ffffff;
+}
+
+
+.footer {
+  object-fit: cover;
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  padding: 1%;
 }
