@@ -88,6 +88,11 @@ function initMap() {
                     errorHandler.innerHTML = "";
                     // console.log(`Attraction ${i + 1}: ${place.name}`);
                     // display attraction results
+
+
+                    var website = result.website.split("?");
+                    website = website[0];
+
                     
                     attractionNameEl[i].innerHTML = ` ${place.name}`;
                     searchFlickrImages(query + " " + place.name);
@@ -97,14 +102,15 @@ function initMap() {
                     }`;
                     attractionAddressEl[
                       i
-                    ].innerHTML = `Address: ${result.formatted_address}`;
+                    ].innerHTML = ` ${result.formatted_address}`;
                     attractionPhoneNumberEl[
                       i
-                    ].innerHTML = `Phone Number: ${result.formatted_phone_number}`;
+                    ].innerHTML = ` ${result.formatted_phone_number}`;
                     attractionWebsiteEl[
                       i
-                    ].innerHTML = `Website: ${result.website}`;
-                    attractionRatingEl[i].innerHTML = `Rating: ${place.rating}`;
+                    ].innerHTML = ` ${website}`;
+                    attractionWebsiteEl[i].href = website;
+                    attractionRatingEl[i].innerHTML = `Rating: ${place.rating}/5`;
                   }
                 }
               );
