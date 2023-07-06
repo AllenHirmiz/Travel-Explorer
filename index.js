@@ -19,7 +19,7 @@ var viewFavourite = document.getElementById("view-favourite");
 const cityHeading = document.getElementById("city-heading");
 const modalHeading = document.getElementById("modal-heading");
 const titleEl = document.getElementById("title");
-const clearButton = document.getElementById("clear-favourites");
+const clearButton = document.getElementById("clear-all-favourites");
 
 let map;
 let service;
@@ -229,13 +229,15 @@ function renderfavourites() {
     input.setAttribute("id", favourites);
     input.setAttribute("class", "list-group-item");
     input.setAttribute("onClick", "reply_click(this.id)");
+
     favouritesList.appendChild(input);
   }
 }
 
 function clearLocalStorage() {
   localStorage.clear();
-  location.reload();
+  favourite = [];
+  renderfavourites();
 }
 
 clearButton.addEventListener("click", clearLocalStorage);
