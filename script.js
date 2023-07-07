@@ -17,8 +17,8 @@ const favouritesList = document.getElementById("favourite-list");
 const viewFavourite = document.getElementById("view-favourite");
 const cityHeading = document.querySelector(".city-heading");
 const modalHeading = document.getElementById("modal-heading");
-const titleEl = document.getElementById("title");
-const clearButton = document.getElementById("clear-all-favourites");
+const titleEl = document.querySelector(".title");
+const clearBtn = document.getElementById("clear-all-favourites");
 
 // variables
 let map;
@@ -42,8 +42,11 @@ function initMap() {
   searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
     mapEl.style.display = "flex";
-    cityHeading.innerHTML = cityInput.value;
-    modalHeading.innerHTML = cityInput.value;
+    cityHeading.innerHTML =
+      cityInput.value.charAt(0).toUpperCase() + cityInput.value.slice(1);
+
+    modalHeading.innerHTML =
+      cityInput.value.charAt(0).toUpperCase() + cityInput.value.slice(1);
 
     // Get the value of the input field
     const query = cityInput.value;
@@ -87,9 +90,6 @@ function initMap() {
                 (result, status) => {
                   if (status === google.maps.places.PlacesServiceStatus.OK) {
                     errorHandler.innerHTML = "";
-                    // console.log(`Attraction ${i + 1}: ${place.name}`);
-                    // display attraction results
-
                     var website = result.website.split("?");
                     website = website[0];
 
@@ -122,7 +122,6 @@ function initMap() {
     mainContainerEl.classList.remove("hide");
     mapEl.classList.remove("hide");
     addFavourite.classList.remove("hide");
-    titleEl.classList.remove("page-center");
   });
 }
 // createMarker gets place markers on google maps
@@ -203,8 +202,6 @@ addFavourite.addEventListener("click", function (event) {
 
   // Store updated Favourite in localStorage, re-render the list
   storeFavourite();
-
-  console.log(localStorage);
 });
 
 viewFavourite.addEventListener("click", function (event) {
@@ -218,27 +215,22 @@ viewFavourite.addEventListener("click", function (event) {
   renderfavourites();
 });
 
+// Render a new li for each favourite
 function renderfavourites() {
   favouritesList.innerHTML = "";
-
-  // Render a new li for each favourite
   for (var i = 0; i < favourite.length; i++) {
     var favourites = favourite[i];
-    console.log(favourites);
     var input = document.createElement("li");
     input.innerHTML = favourites;
     input.setAttribute("id", favourites);
     input.setAttribute("class", "list-group-item");
     input.setAttribute("onClick", "reply_click(this.id)");
-
     favouritesList.appendChild(input);
   }
 }
-
-function clearLocalStorage() {
-  localStorage.clear();
+// clear button
+clearBtn.addEventListener("click", function () {
+  favouritesList.innerHTML = "";
   favourite = [];
-  renderfavourites();
-}
-
-clearButton.addEventListener("click", clearLocalStorage);
+  localStorage.removeItem("favourite");
+});
