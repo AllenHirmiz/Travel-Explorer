@@ -95,7 +95,6 @@ function initMap() {
 
                     attractionNameEl[i].innerHTML = ` ${place.name}`;
                     searchFlickrImages(query + " " + place.name);
-                    attractionNameEl[i].innerHTML = ` ${place.name}`;
                     attractionAddressEl[
                       i
                     ].innerHTML = ` ${result.formatted_address}`;

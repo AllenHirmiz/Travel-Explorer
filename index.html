@@ -106,84 +106,85 @@
       </button>
     </div>
     <!-- grid -->
-    <div id="mainContainer" class="grid-container full hide margin">
+    <div id="mainContainer" class="grid-container full hide">
       <div class="grid-x grid-margin-x grid-padding-x">
         <div id="Popular-attractions" class="cell small-12 large-6">
           <!-- Google places -->
-          <h2 class="text-left">Popular attractions</h2>
+          <h2 class="text-center">Popular attractions</h2>
           <div class="grid-container">
-            <!-- result -->
-            <div class="card">
-              <div class="card-divider">
-                <h2 class="attractions-name"></h2>
+            <div class="grid-x grid-margin-x small-up-2 medium-up-3">
+              <!-- result 1-->
+              <div class="card">
+                <div class="card-divider">
+                  <h4 class="attractions-name"></h4>
+                </div>
+                <div class="card-section">
+                  <p class="attractions-address"></p>
+                  <p class="attractions-phone-number"></p>
+                  <p class="attractions-website"></p>
+                  <p class="attractions-rating"></p>
+                </div>
               </div>
-              <div class="card-section">
-                <p class="attractions-address"></p>
-                <p class="attractions-phone-number"></p>
-                <a href="" class="attractions-website"></a>
-                <p class="attractions-rating"></p>
+              <!-- end of result -->
+              <!-- result 2-->
+              <div class="card">
+                <div class="card-divider">
+                  <h4 class="attractions-name"></h4>
+                </div>
+                <div class="card-section">
+                  <p class="attractions-address"></p>
+                  <p class="attractions-phone-number"></p>
+                  <p class="attractions-website"></p>
+                  <p class="attractions-rating"></p>
+                </div>
               </div>
+              <!-- end of result -->
+              <!-- result 3-->
+              <div class="card">
+                <div class="card-divider">
+                  <h4 class="attractions-name"></h4>
+                </div>
+                <div class="card-section">
+                  <p class="attractions-address"></p>
+                  <p class="attractions-phone-number"></p>
+                  <p class="attractions-website"></p>
+                  <p class="attractions-rating"></p>
+                </div>
+              </div>
+              <!-- end of result -->
+              <!-- result 4-->
+              <div class="card">
+                <div class="card-divider">
+                  <h4 class="attractions-name"></h4>
+                </div>
+                <div class="card-section">
+                  <p class="attractions-address"></p>
+                  <p class="attractions-phone-number"></p>
+                  <p class="attractions-website"></p>
+                  <p class="attractions-rating"></p>
+                </div>
+              </div>
+              <!-- end of result -->
+              <!-- result 5-->
+              <div class="card">
+                <div class="card-divider">
+                  <h4 class="attractions-name"></h4>
+                </div>
+                <div class="card-section">
+                  <p class="attractions-address"></p>
+                  <p class="attractions-phone-number"></p>
+                  <p class="attractions-website"></p>
+                  <p class="attractions-rating"></p>
+                </div>
+              </div>
+              <!-- end of result -->
             </div>
-            <!-- end of result -->
-            <!-- result -->
-            <div class="card">
-              <div class="card-divider">
-                <h2 class="attractions-name"></h2>
-              </div>
-              <div class="card-section">
-                <p class="attractions-address"></p>
-                <p class="attractions-phone-number"></p>
-                <a href="" class="attractions-website"></a>
-                <p class="attractions-rating"></p>
-              </div>
-            </div>
-            <!-- end of result -->
-            <!-- result -->
-            <div class="card">
-              <div class="card-divider">
-                <h2 class="attractions-name"></h2>
-              </div>
-              <div class="card-section">
-                <p class="attractions-address"></p>
-                <p class="attractions-phone-number"></p>
-                <a href="" class="attractions-website"></a>
-                <p class="attractions-rating"></p>
-              </div>
-            </div>
-            <!-- end of result -->
-            <!-- result -->
-            <div class="card">
-              <div class="card-divider">
-                <h2 class="attractions-name"></h2>
-              </div>
-              <div class="card-section">
-                <p class="attractions-address"></p>
-                <p class="attractions-phone-number"></p>
-                <a href="" class="attractions-website"></a>
-                <p class="attractions-rating"></p>
-              </div>
-            </div>
-            <!-- end of result -->
-            <!-- result -->
-            <div class="card">
-              <div class="card-divider">
-                <h2 class="attractions-name"></h2>
-              </div>
-              <div class="card-section">
-                <p class="attractions-address"></p>
-                <p class="attractions-phone-number"></p>
-                <a href="" class="attractions-website"></a>
-                <p class="attractions-rating"></p>
-              </div>
-            </div>
-            <!-- end of result -->
           </div>
         </div>
 
         <!-- filckr -->
         <div id="flickr-container" class="cell small-12 large-6">
           <h2 class="text-left">Photos</h2>
-
           <div class="photo-size grid-container">
             <div
               class="grid-x grid-margin-x small-up-2 medium-up-3"
@@ -196,6 +197,22 @@
     <footer>
       <h4>Designed by Group 8</h4>
     </footer>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAadcyTg2d2ZA-jt8Voo69vMSsuRF27A-I&callback=initMap&libraries=places&v=weekly"
+    defer></script>
+  <script>
+    function reply_click(clicked_id) {
+      document.getElementById("city-input").value = clicked_id;
+      document.getElementById("search").click();
+      document.getElementById("close-button").click();
+    }
+  </script>
+  <script>
+    $(document).ready(function () {
+      $(document).foundation();
+    });
+  </script>
+</body>
 
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAadcyTg2d2ZA-jt8Voo69vMSsuRF27A-I&callback=initMap&libraries=places&v=weekly"

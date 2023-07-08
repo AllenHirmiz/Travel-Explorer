@@ -10,6 +10,18 @@
   --font-weight-bold:bold
 }
 
+.small-6{
+  /* background-color: aqua; */
+  border: 1px solid black;
+}
+
+h2 {
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 2PX;
+  padding-top: 2%;
+}
+
 /* body */
 body {
   height: 100vh;
@@ -36,9 +48,14 @@ h4 {
   font-size: 1.5rem;
   color: var(--primary-color);
 }
+
 p {
   font-size: 16px;
   color: var(--light-grey-color);
+  }
+
+#photos-container .card {
+  background-color: #0077B6;
 }
 #modal-heading{
   color: var(--primary-color);
@@ -145,7 +162,18 @@ input[type="text"] {
   border-radius: 8px;
 }
 
+
 /* list */
+
+.grid-padding-x {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+ol li:hover {
+  background-color: #ccc;
+}
+
 .list-group {
   margin-bottom: 1rem;
   border: 0px solid var(--secondary-color);
