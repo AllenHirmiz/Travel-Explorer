@@ -16,7 +16,7 @@ const addFavourite = document.getElementById("add-favourite");
 const favouritesList = document.getElementById("favourite-list");
 const viewFavourite = document.getElementById("view-favourite");
 const cityHeading = document.querySelector(".city-heading");
-const modalHeading = document.getElementById("modal-heading");
+const modalHeading = document.querySelectorAll(".modal-heading");
 const titleEl = document.querySelector(".title");
 const clearBtn = document.getElementById("clear-all-favourites");
 
@@ -45,8 +45,10 @@ function initMap() {
     cityHeading.innerHTML =
       cityInput.value.charAt(0).toUpperCase() + cityInput.value.slice(1);
 
-    modalHeading.innerHTML =
-      cityInput.value.charAt(0).toUpperCase() + cityInput.value.slice(1);
+    modalHeading.forEach((modalHeading) => {
+      modalHeading.innerHTML =
+        cityInput.value.charAt(0).toUpperCase() + cityInput.value.slice(1);
+    });
 
     // Get the value of the input field
     const query = cityInput.value;

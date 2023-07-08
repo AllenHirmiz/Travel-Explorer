@@ -13,8 +13,8 @@
       crossorigin="anonymous"
     />
 
-    <!-- Compressed JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/vendor/jquery.min.js"></script>
+    <!-- Script links -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.1/dist/js/foundation.min.js"
       integrity="sha256-WUKHnLrIrx8dew//IpSEmPN/NT3DGAEmIePQYIEJLLs= sha384-53StQWuVbn6figscdDC3xV00aYCPEz3srBdV/QGSXw3f19og3Tq2wTRe0vJqRTEO sha512-X9O+2f1ty1rzBJOC8AXBnuNUdyJg0m8xMKmbt9I3Vu/UOWmSg5zG+dtnje4wAZrKtkopz/PEDClHZ1LXx5IeOw=="
@@ -76,8 +76,8 @@
     </article>
 
     <!-- favourites -->
-    <div class="reveal" id="add-favourite-modal" data-reveal>
-      <h1 id="modal-heading"></h1>
+    <section class="reveal" id="add-favourite-modal" data-reveal>
+      <h2 class="modal-heading"></h2>
       <p class="lead">is added to favourite section.</p>
       <input type="button" data-close class="button" value="Ok" />
       <button
@@ -88,10 +88,11 @@
       >
         <span aria-hidden="true">&times;</span>
       </button>
-    </div>
-    <div class="reveal" id="select-favourite-modal" data-reveal>
-      <!-- favourite list -->
-      <h2 id="modal-heading">Favourite List</h2>
+    </section>
+
+    <!-- favourite list -->
+    <section class="reveal" id="select-favourite-modal" data-reveal>
+      <h2 class="modal-heading">Favourite List</h2>
       <ol id="favourite-list" class="list-group no-bullet search-form"></ol>
       <button id="clear-all-favourites" class="button">Clear All</button>
       <button data-close class="button">Close</button>
@@ -104,12 +105,14 @@
       >
         <span aria-hidden="true">&times;</span>
       </button>
-    </div>
+    </section>
+
     <!-- grid -->
-    <div id="mainContainer" class="grid-container full hide">
+    <article id="mainContainer" class="grid-container full hide">
       <div class="grid-x grid-margin-x grid-padding-x">
-        <div id="Popular-attractions" class="cell small-12 large-6">
+        <section id="Popular-attractions" class="cell small-12 large-6">
           <!-- Google places -->
+
           <h2 class="text-left">Popular attractions</h2>
           <div class="grid-container">
             <!-- result 1-->
@@ -125,6 +128,7 @@
               </div>
             </div>
             <!-- end of result -->
+
             <!-- result 2-->
             <div class="card">
               <div class="card-divider">
@@ -138,6 +142,7 @@
               </div>
             </div>
             <!-- end of result -->
+
             <!-- result 3-->
             <div class="card">
               <div class="card-divider">
@@ -151,6 +156,7 @@
               </div>
             </div>
             <!-- end of result -->
+
             <!-- result 4-->
             <div class="card">
               <div class="card-divider">
@@ -164,6 +170,7 @@
               </div>
             </div>
             <!-- end of result -->
+
             <!-- result 5-->
             <div class="card">
               <div class="card-divider">
@@ -178,10 +185,10 @@
             </div>
             <!-- end of result -->
           </div>
-        </div>
+        </section>
 
         <!-- filckr -->
-        <div id="flickr-container" class="cell small-12 large-6">
+        <section id="flickr-container" class="cell small-12 large-6">
           <h2 class="text-left">Photos</h2>
           <div class="photo-size grid-container">
             <div
@@ -189,9 +196,11 @@
               id="photos-container"
             ></div>
           </div>
-        </div>
+        </section>
       </div>
-    </div>
+    </article>
+
+    <!-- footer -->
     <footer>
       <h4>Designed by Group 8</h4>
     </footer>
@@ -200,6 +209,7 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAadcyTg2d2ZA-jt8Voo69vMSsuRF27A-I&callback=initMap&libraries=places&v=weekly"
       defer
     ></script>
+    <!-- reply click for clicked button -->
     <script>
       function reply_click(clicked_id) {
         document.getElementById("city-input").value = clicked_id;
