@@ -1,9 +1,18 @@
+/* import */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+/* root */
+:root{
+  --primary-color:#0077B6;
+  --secondary-color:#e9e6e6;
+  --light-grey-color:#666;
+  --white-color:#ffffff;
+  --font-weight-bold:bold
+}
 
 .small-6{
   /* background-color: aqua; */
   border: 1px solid black;
-
 }
 
 h2 {
@@ -13,156 +22,148 @@ h2 {
   padding-top: 2%;
 }
 
-.city-heading {
-  color: #0077B6;
-  padding-bottom: 2%;
-  text-transform: uppercase;
+/* body */
+body {
+  height: 100vh;
+  padding: 0;
+  background-color: var(--secondary-color);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
 }
 
-.grid-x {
-  padding: 2%;
+/* typography */
+h1{
+  color: var(--white-color);
+  font-size: 4rem;
+  font-weight: var(--font-weight-bold);
+}
+h2 {
+  color: var(--white-color);
+  font-size: 2.5rem;
+  margin: 2%;
+  font-weight: var(--font-weight-bold);
+
+}
+h4 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
 }
 
-.favourite-section {
-  background-color: #e9e6e6;
-}
-
-/* 
-* Always set the map height explicitly to define the size of the div element
-* that contains the map. 
-*/
-#map {
-  height: 20rem;
-  width: 100%;
-}
-
-.photo-size {
-  margin-bottom: 1%;
-  background-color: #0077B6;
-  color: #0077B6;
-  border-radius: 8px;
-}
+p {
+  font-size: 16px;
+  color: var(--light-grey-color);
+  }
 
 #photos-container .card {
   background-color: #0077B6;
 }
-
-.grid-margin-x {
-  margin: 0;
+#modal-heading{
+  color: var(--primary-color);
+}
+.list-group-item{
+  color: var(--white-color);
 }
 
-
-/* 
- * Optional: Makes the sample page fill the window. 
- */
-html,
-body {
-  height: 100%;
-  padding: 0;
-  background-color: #e9e6e6;
-}
-
-.header {
-  background-color: #0077B6;
+/* hero */
+.hero {
+  background-color: var(--primary-color);
   padding-top: 4%;
   padding-bottom: 4%;
 }
 
 #search {
-  background-color: #ffffff;
-  color: #0077B6;
-  font-weight: 700;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
 #search:hover {
-  background-color: #37393b;
-  color: #ffffff;
-  font-weight: 700;
+  background-color: var(--light-grey-color);
+  color: var(--secondary-color);
 }
 
 #title{
-  color: #ffffff; /* Dark blue title color */
-  font-size: 3rem;
   margin-bottom: 2rem;
   margin-top: 10px;
-  font-weight: 700;
 }
+
+/* map information */
+#map {
+  height: 20rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.city-heading {
+  color: var(--primary-color);
+}
+#mainContainer{
+  background-color: var(--primary-color);
+  }
+
+/* favourite section */
+.favourite-section {
+  background-color: var(--secondary-color)
+}
+
+.list-group-item:hover {
+  background-color: #004970;
+}
+
+/* photo */
+.photo-size {
+  margin-bottom: 1%;
+  background-color: var(--primary-color);
+  color: var(--primary-color);
+  border-radius: 8px;
+}
+
+.photo-size .card {
+  background-color: var(--primary-color);
+  
+}
+
 input[type="text"] {
   padding: 0.5rem;
   border-radius: 8px;
-  border: 1px solid #0077B6; /* Medium blue border color */
-  font-size: 1rem;
+  border: 1px solid var(--primary-color);
   margin-right: 1rem;
 }
 
-.card-section{
-  width: 40rem;
-}
-
-#mainContainer{
-background-color: #0077B6;
-}
-
+/* card */
 .card {
   border-radius: 8px;
   border: 0;
-  background-color: #e9e6e6;
+  background-color: var(--secondary-color);
 }
 
-.card-section{
-  width: 40rem;
-}
 .card-divider{
+ width: 100%;
   background: #2f3133;
-}
-
-.card h4 {
-  margin-top: 0;
-  font-size: 24px;
-  color: #ffffff;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: bold;
-}
-
-.card p {
-  margin: 0;
-  font-size: 16px;
-  color: #666;
-  font-family: 'Montserrat', sans-serif;
 }
 
 .card .attractions-address {
   font-weight: bold;
-  color: #333;
-  font-family: 'Montserrat', sans-serif;
+  color: var(--light-grey-color);
 }
 
 .card .attractions-website a {
-  color: #007bff;
+  color: var(--primary-color);
   text-decoration: none;
-  font-family: 'Montserrat', sans-serif;
 }
 
 .card .attractions-rating {
   margin-top: 10px;
   font-style: italic;
-  color: #666;
-  font-family: 'Montserrat', sans-serif;
+  color: var(--light-grey-color);
 }
 
-.city-heading {
-  text-align: center;
-}
-
-
-.page-center {
-  margin-top: 30%;
-}
-
+/* button */
 .button {
   margin: 0 1rem 1rem 1rem;
   border-radius: 8px;
 }
+
+
+/* list */
 
 .grid-padding-x {
   margin-top: 2%;
@@ -173,15 +174,14 @@ ol li:hover {
   background-color: #ccc;
 }
 
-
 .list-group {
-margin-bottom: 1rem;
-border: 0px solid #e6e6e6;
-background: #fefefe;
-box-shadow: none;
-overflow: hidden;
-color: #0a0a0a;
-border-radius: 8px;
+  margin-bottom: 1rem;
+  border: 0px solid var(--secondary-color);
+  background: var(--secondary-color);
+  box-shadow: none;
+  overflow: hidden;
+  color: var(--light-grey-color);
+  border-radius: 8px;
 }
 
 .list-group > :last-child {
@@ -189,27 +189,22 @@ margin-bottom: 0;
 }
 
 .list-group-item {
-padding: 1rem;
-border-bottom: 1px solid #e6e6e6;
-cursor: pointer;
-border-radius: 8px;
-background-color: #7e92bd;
+  padding: 1rem;
+  border-bottom: 1px solid var(--secondary-color);
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: var(--primary-color);
 }
 
-.list-group-item > :last-child {
-margin-bottom: 0;
-border-bottom: none;
-}
-
-.list-group-item:hover, .list-group-item:focus {
-background-color: #0077B6;
-color: #ffffff;
-}
-
-
-.footer {
-  object-fit: cover;
+/* footer */
+footer {
   text-align: center;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  padding: 1%;
+  padding: 1rem;
+}
+
+/* media query */
+@media screen and (max-width:768px){
+  .grid-x .grid-margin-x .grid-padding-x{
+display: none;
+  }
 }
