@@ -40,7 +40,7 @@ p {
   font-size: 16px;
   color: var(--light-grey-color);
   }
-#modal-heading{
+.modal-heading{
   color: var(--primary-color);
 }
 .list-group-item{
