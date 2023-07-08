@@ -9,8 +9,8 @@
 h2 {
   color: #ffffff;
   font-weight: 600;
-  margin: 2%;
   letter-spacing: 2PX;
+  padding-top: 2%;
 }
 
 .city-heading {
@@ -43,9 +43,8 @@ h2 {
   border-radius: 8px;
 }
 
-.photo-size .card {
+#photos-container .card {
   background-color: #0077B6;
-  
 }
 
 .grid-margin-x {
@@ -163,6 +162,11 @@ background-color: #0077B6;
 .button {
   margin: 0 1rem 1rem 1rem;
   border-radius: 8px;
+}
+
+.grid-padding-x {
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 ol li:hover {
