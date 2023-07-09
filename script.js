@@ -92,8 +92,7 @@ function initMap() {
                 (result, status) => {
                   if (status === google.maps.places.PlacesServiceStatus.OK) {
                     errorHandler.innerHTML = "";
-                    var website = result.website.split("?");
-                    website = website[0];
+                    var website = result.website
 
                     attractionNameEl[i].innerHTML = ` ${place.name}`;
                     searchFlickrImages(query + " " + place.name);
