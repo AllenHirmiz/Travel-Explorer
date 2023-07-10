@@ -1,10 +1,10 @@
-Travel Explorer
+#Travel Explorer
 
 The "Travel Explorer" project is a web application that allows users to search for tourist attractions and explore photos of various destinations. Users can enter the name of a destination and retrieve information about popular attractions, including their names, addresses, phone numbers, websites, and ratings. Additionally, the application fetches photos related to the destination using the Flickr API.
 
 URL of deployed application: https://allenhirmiz.github.io/Travel-Explorer/
 
-User story:
+##User story:
 
 As a user, I want to be able to enter the name of a city or travel destination in a search bar so that I can explore information about that location.
 As a user, I want to see a list of popular attractions and landmarks in the chosen destination.
@@ -15,29 +15,29 @@ As a user, I want the application to be responsive and adapt to different screen
 As a user, I want to have a visually appealing and polished user interface with a clean layout.
 As a user, I want to have a smooth and intuitive experience using modals for additional information and confirmation messages.
 
-Acceptance Criteria:
+##Acceptance Criteria:
 
 The homepage of the application prominently displays a search bar, allowing users to enter the name of a city or travel destination.
 When a user enters a valid city or travel destination and submits the search, the application successfully retrieves relevant information about that location, including popular attractions, photos and ratings.
 The displayed information for the searched location is clear, organised, and visually appealing, ensuring a positive user experience.
 
-Features
+##Features
 
-1. Search Form: The application provides a search form where users can enter the name of their desired destination.
+1. Search Form: The application provides a search form where users can enter the name of their desired destination. ![Search form](./screenshots/Search%20form.jpg)
 
-2. Popular Attractions: After submitting the search form, the application uses the Google Places API to fetch information about popular tourist attractions near the specified destination. It retrieves details such as attraction names, addresses, phone numbers, websites, and ratings. The information is displayed in a grid format, with each attraction represented by a card.
+2. Popular Attractions: After submitting the search form, the application uses the Google Places API to fetch information about popular tourist attractions near the specified destination. It retrieves details such as attraction names, addresses, phone numbers, websites, and ratings. The information is displayed in a grid format, with each attraction represented by a card. ![Popular Attractions](./screenshots/Popular%20attractions.jpg)
 
-3. Photos: The application integrates with the Flickr API to search for photos related to the destination. It retrieves a collection of photos and displays them in a separate section. Each photo is displayed in a card format.
+3. Photos: The application integrates with the Flickr API to search for photos related to the destination. It retrieves a collection of photos and displays them in a separate section. Each photo is displayed in a card format. ![Photos](./screenshots/Photos.jpg)
 
-4. Map Display: The application utilizes the Google Maps JavaScript API to show a map of the specified destination. The map is centered on the location and displays markers for each attraction. Clicking on a marker opens an information window with the attraction's name.
+4. Map Display: The application utilizes the Google Maps JavaScript API to show a map of the specified destination. The map is centered on the location and displays markers for each attraction. Clicking on a marker opens an information window with the attraction's name.![Map Display](./screenshots/Map%20display.jpg)
 
-5. Favourite Management: The application allows users to add destinations to their favorites list. When the user clicks the "Add to Favourite" button, the destination is added to the favorites section. The favorites list is stored in the browser's localStorage.
+5. Favourite Management: The application allows users to add destinations to their favorites list. When the user clicks the "Add to Favourite" button, the destination is added to the favorites section. The favorites list is stored in the browser's localStorage.![Favourite management](./screenshots/Favourite%20Management.jpg)
 
-6. Select From Favourites: Users can view their favorite destinations by clicking the "Select From Favourites" button. This opens a modal that displays the list of saved favorites. Clicking on a favorite destination pre-fills the search form with the selected destination and initiates a search.
+6. Select From Favourites: Users can view their favorite destinations by clicking the "Select From Favourites" button. This opens a modal that displays the list of saved favorites. Clicking on a favorite destination pre-fills the search form with the selected destination and initiates a search. ![Select from favourites](./screenshots/Select%20from%20favourites.jpg)
 
-7. Error Handling: The application includes error handling to display messages when there is no attraction data found or when there are issues with retrieving photos.
+7. Error Handling: The application includes error handling to display messages when there is no attraction data found or when there are issues with retrieving photos.![Error Handling](./screenshots/Error%20Handling.jpg)
 
-Technologies Used
+##Technologies Used
 
 The project utilizes the following technologies:
 
@@ -53,8 +53,7 @@ The project utilizes the following technologies:
 
 - Flickr API: The API is used to search for and retrieve photos related to the destination.
 
-Usage
-
+##Usage
 To use the application, follow these steps:
 
 1. Open the web page in a modern web browser.
@@ -71,7 +70,7 @@ To use the application, follow these steps:
 
 7. To view your favorite destinations, click the "Select From Favourites" button. This will open a modal displaying your saved favorites. Clicking on a favorite destination will pre-fill the search form with the selected destination and initiate a search.
 
-Limitations and Future Improvements
+##Limitations and Future Improvements
 
 - The application currently fetches only the top 5 attractions near the specified destination.
 
