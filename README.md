@@ -1,10 +1,10 @@
-Travel Explorer
+#Travel Explorer
 
 The "Travel Explorer" project is a web application that allows users to search for tourist attractions and explore photos of various destinations. Users can enter the name of a destination and retrieve information about popular attractions, including their names, addresses, phone numbers, websites, and ratings. Additionally, the application fetches photos related to the destination using the Flickr API.
 
 URL of deployed application: https://allenhirmiz.github.io/Travel-Explorer/
 
-User story:
+##User story:
 
 As a user, I want to be able to enter the name of a city or travel destination in a search bar so that I can explore information about that location.
 As a user, I want to see a list of popular attractions and landmarks in the chosen destination.
@@ -15,13 +15,13 @@ As a user, I want the application to be responsive and adapt to different screen
 As a user, I want to have a visually appealing and polished user interface with a clean layout.
 As a user, I want to have a smooth and intuitive experience using modals for additional information and confirmation messages.
 
-Acceptance Criteria:
+##Acceptance Criteria:
 
 The homepage of the application prominently displays a search bar, allowing users to enter the name of a city or travel destination.
 When a user enters a valid city or travel destination and submits the search, the application successfully retrieves relevant information about that location, including popular attractions, photos and ratings.
 The displayed information for the searched location is clear, organised, and visually appealing, ensuring a positive user experience.
 
-Features
+##Features
 
 1. Search Form: The application provides a search form where users can enter the name of their desired destination.
 
@@ -37,7 +37,7 @@ Features
 
 7. Error Handling: The application includes error handling to display messages when there is no attraction data found or when there are issues with retrieving photos.
 
-Technologies Used
+##Technologies Used
 
 The project utilizes the following technologies:
 
@@ -53,7 +53,7 @@ The project utilizes the following technologies:
 
 - Flickr API: The API is used to search for and retrieve photos related to the destination.
 
-Usage
+##Usage
 
 To use the application, follow these steps:
 
@@ -71,7 +71,7 @@ To use the application, follow these steps:
 
 7. To view your favorite destinations, click the "Select From Favourites" button. This will open a modal displaying your saved favorites. Clicking on a favorite destination will pre-fill the search form with the selected destination and initiate a search.
 
-Limitations and Future Improvements
+##Limitations and Future Improvements
 
 - The application currently fetches only the top 5 attractions near the specified destination.
 
