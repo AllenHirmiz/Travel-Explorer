@@ -92,9 +92,11 @@ function initMap() {
                 (result, status) => {
                   if (status === google.maps.places.PlacesServiceStatus.OK) {
                     errorHandler.innerHTML = "";
-                    var website = result.website.split("?");
-                    website = website[0];
-
+                    
+                    if (result.website){
+                      var website = result.website.split("?");
+                      website = website[0];
+                  }
                     attractionNameEl[i].innerHTML = ` ${place.name}`;
                     searchFlickrImages(query + " " + place.name);
                     attractionAddressEl[
@@ -104,7 +106,7 @@ function initMap() {
                       i
                     ].innerHTML = ` ${result.formatted_phone_number}`;
                     attractionWebsiteEl[i].innerHTML = ` ${website}`;
-                    attractionWebsiteEl[i].href = website;
+                    attractionWebsiteEl[i].href = ` ${website}`;
                     attractionRatingEl[
                       i
                     ].innerHTML = `Rating: ${place.rating}/5`;
