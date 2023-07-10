@@ -14,6 +14,7 @@
 body {
   height: 100vh;
   padding: 0;
+  margin: 0;
   background-color: var(--secondary-color);
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
